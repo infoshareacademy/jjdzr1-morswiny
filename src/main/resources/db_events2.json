@@ -32,7 +32,39 @@
 		}
 	},
 	{
-	"id": 2581,
+	"id": 2582,
+		"place": {
+			"id": 89,
+			"subname": "Teatr upadlych kursantow)",
+			"name": "Javovcy na scenie"
+		},
+		"endDate": "2015­08­04T23:59:59+0200",
+		"name": "Java i co jeszcze?",
+		"urls": {
+			"www": "http://www.teatrnaplazy.pl/event/shirley­valentine­4/",
+			"tickets": "http://teatrnaplazy.interticket.pl/"
+		},
+		"attachments": [
+			{
+				"fileName": "http://www.teatrnaplazy.pl/wp­content/uploads/A3­Shirley_1412014_bez_daty_z_napisem_sopot_72­300x212.jpg"
+			}
+		],
+		"descLong": "u mnie dziala",
+		"categoryId": 23,
+		"startDate": "2015­08­10T19:00:00+0200",
+		"organizer": {
+			"id": 54,
+			"designation": "Teatr na Plaży"
+		},
+		"active": 0,
+		"tickets": {
+			"type": "tickets",
+			"startTicket": "35",
+			"endTicket": "35"
+		}
+		},
+	{
+	"id": 2531,
 		"place": {
 			"id": 88,
 			"subname": "Teatr o dziwnej nazwie)",
@@ -67,11 +99,11 @@
 	"id": 2582,
 		"place": {
 			"id": 89,
-			"subname": "Teatr upadlych kursantow)",
-			"name": "Javovcy na scenie"
+			"subname": "hop hop",
+			"name": "dobra dobra"
 		},
-		"endDate": "2015­08­04T23:59:59+0200",
-		"name": "Java i co jeszcze?",
+		"endDate": "2021­08­04T23:59:59+0200",
+		"name": "jakies wysublimowane imie ",
 		"urls": {
 			"www": "http://www.teatrnaplazy.pl/event/shirley­valentine­4/",
 			"tickets": "http://teatrnaplazy.interticket.pl/"
@@ -81,12 +113,12 @@
 				"fileName": "http://www.teatrnaplazy.pl/wp­content/uploads/A3­Shirley_1412014_bez_daty_z_napisem_sopot_72­300x212.jpg"
 			}
 		],
-		"descLong": "u mnie dziala",
-		"categoryId": 23,
-		"startDate": "2015­08­10T19:00:00+0200",
+		"descLong": "uasadjsa duzo tekstu bla bla bla duzo tekstu, uasadjsa duzo tekstu bla bla bla duzo tekstu, uasadjsa duzo tekstu bla bla bla duzo tekstu",
+		"categoryId": 15,
+		"startDate": "2020­08­10T19:00:00+0200",
 		"organizer": {
-			"id": 54,
-			"designation": "Teatr na Plaży"
+			"id": 12,
+			"designation": "Teatr na na molo"
 		},
 		"active": 0,
 		"tickets": {
@@ -94,6 +126,5 @@
 			"startTicket": "35",
 			"endTicket": "35"
 		}
-	}
-	
+		}
 ]
