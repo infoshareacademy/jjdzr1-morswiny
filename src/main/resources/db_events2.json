@@ -1,0 +1,99 @@
+[
+	{
+		"id": 2580,
+		"place": {
+			"id": 87,
+			"subname": "Teatr na Plaży @ Kulturalna Plaża (scena plenerowa przed Teatrem na Plaży i Klubem Atelier)",
+			"name": "Teatr na Plaży"
+		},
+		"endDate": "2015­08­04T23:59:59+0200",
+		"name": "Shirley Valentine",
+		"urls": {
+			"www": "http://www.teatrnaplazy.pl/event/shirley­valentine­4/",
+			"tickets": "http://teatrnaplazy.interticket.pl/"
+		},
+		"attachments": [
+			{
+				"fileName": "http://www.teatrnaplazy.pl/wp­content/uploads/A3­Shirley_1412014_bez_daty_z_napisem_sopot_72­300x212.jpg"
+			}
+		],
+		"descLong": "W. Russell\\nShirley Valentine\\nSzanowne Panie! Szanowni Panowie!Czasem trzeba sobie po prostuporozmawiać\\, choćby ze ścianą. Wsypialni\\, łazience\\, salonie\\, kuchni\\, nawet tąz odpadającym tynkiem.Shirley Valentine codziennierozmawia ze swoją wierną towarzyszką\\,ścianą kuchenną.Ale jak ona rozmawia!Ostatecznie\\, metafizycznie\\, dowcipnie\\, wulgarnie\\,rozpaczliwie\\, słodko\\, ponętnie\\, epicko…? Wtych rozmowach zamyka sięjej egzystencja\\, ludzkaegzystencja\\, egzystencja w ogóle. Ściana jąwysłucha. Ale czy da jej siłę? Czy Shirleyodbije się od swojej ściany?Na to pytanie\\, DrodzyWidzowie\\, możecie sobie odpowiedzieć\\,oglądając naszą „Shirley Valentine”.Oto przed Wami solidna dawka dobrego humoru w najlepszymaktorskim wykonaniu. Spektakl z temperamentem\\, pazurem\\,dowcipem\\, namiętnością i kobiecąsiłą.\\nOd 1990 roku grany na deskach teatralnychcałego świata. Entuzjastycznie przyjmowany\\,również przez męską częśćpubliczności. Shirley\\, kiedyś kobieta z wielkimimarzeniami\\, dziś pełna lęku iniepewności\\, staje w szranki z najtrudniejszymprzeciwnikiem – samą sobą.\\nZapraszamygorąco na niebanalną komedię w wykonaniuMagdaleny Tomaszewskiej. I jej „ściany”oczywiście…\\nReżyseria: DariuszMajchrzak\\nScenografia i kostiumy: Magda Kurek\\nKoordynacja:Dorota Sadowska\\nWystępuje: MagdalenaTomaszewska\\nRezerwacje: 531 587 829",
+		"categoryId": 19,
+		"startDate": "2015­08­04T19:00:00+0200",
+		"organizer": {
+			"id": 51,
+			"designation": "Teatr na Plaży"
+		},
+		"active": 1,
+		"tickets": {
+			"type": "tickets",
+			"startTicket": "35",
+			"endTicket": "35"
+		}
+	},
+	{
+	"id": 2581,
+		"place": {
+			"id": 88,
+			"subname": "Teatr o dziwnej nazwie)",
+			"name": "Teatr dziwny"
+		},
+		"endDate": "2015­08­04T23:59:59+0200",
+		"name": "hop hop Morswin",
+		"urls": {
+			"www": "http://www.teatrnaplazy.pl/event/shirley­valentine­4/",
+			"tickets": "http://teatrnaplazy.interticket.pl/"
+		},
+		"attachments": [
+			{
+				"fileName": "http://www.teatrnaplazy.pl/wp­content/uploads/A3­Shirley_1412014_bez_daty_z_napisem_sopot_72­300x212.jpg"
+			}
+		],
+		"descLong": "jakis bardzo wazny opis",
+		"categoryId": 20,
+		"startDate": "2015­07­04T19:00:00+0200",
+		"organizer": {
+			"id": 50,
+			"designation": "Teatr na Plaży"
+		},
+		"active": 1,
+		"tickets": {
+			"type": "tickets",
+			"startTicket": "35",
+			"endTicket": "35"
+		}
+	},
+	{
+	"id": 2582,
+		"place": {
+			"id": 89,
+			"subname": "Teatr upadlych kursantow)",
+			"name": "Javovcy na scenie"
+		},
+		"endDate": "2015­08­04T23:59:59+0200",
+		"name": "Java i co jeszcze?",
+		"urls": {
+			"www": "http://www.teatrnaplazy.pl/event/shirley­valentine­4/",
+			"tickets": "http://teatrnaplazy.interticket.pl/"
+		},
+		"attachments": [
+			{
+				"fileName": "http://www.teatrnaplazy.pl/wp­content/uploads/A3­Shirley_1412014_bez_daty_z_napisem_sopot_72­300x212.jpg"
+			}
+		],
+		"descLong": "u mnie dziala",
+		"categoryId": 23,
+		"startDate": "2015­08­10T19:00:00+0200",
+		"organizer": {
+			"id": 54,
+			"designation": "Teatr na Plaży"
+		},
+		"active": 0,
+		"tickets": {
+			"type": "tickets",
+			"startTicket": "35",
+			"endTicket": "35"
+		}
+	}
+	
+]
