@@ -11,7 +11,7 @@ public class Event {
     private String categoryId;
     private String startDate;
     private Organizer organizer;
-    private int active;
+    private Integer  active;
     private Ticket tickets;
 
     public String getId() {
@@ -94,11 +94,11 @@ public class Event {
         this.organizer = organizer;
     }
 
-    public int getActive() {
+    public Integer getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 
