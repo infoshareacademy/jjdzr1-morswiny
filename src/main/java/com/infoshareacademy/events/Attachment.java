@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.events;
 
 public class Attachment {
     private String fileName;
@@ -6,9 +6,9 @@ public class Attachment {
     public String getFileName() {
         return fileName;
     }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
-
 
 }

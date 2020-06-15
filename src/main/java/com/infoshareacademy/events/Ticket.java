@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.events;
 
 public class Ticket {
     private String type;
