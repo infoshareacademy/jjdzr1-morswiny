@@ -1,4 +1,6 @@
-package com.infoshareacademy;
+package com.infoshareacademy.events;
+
+import java.util.Arrays;
 
 public class Event {
     private String id;
@@ -14,6 +16,22 @@ public class Event {
     private Integer  active;
     private Ticket tickets;
 
+    @Override
+    public String toString() {
+        return "Event{" + '\n'+
+                "id='" + id + '\n' +
+                "place=" + place +
+                "endDate='" + endDate + '\n' +
+                "name='" + name + '\n' +
+                "urls=" + urls +
+                "attachments=" + Arrays.toString(attachments) + '\n' +
+                "categoryId='" + categoryId + '\n' +
+                "startDate='" + startDate + '\n' +
+                "organizer=" + organizer + '\n' +
+                "active=" + active + '\n' +
+                "tickets=" + tickets + '\n' +
+                '}';
+    }
     public String getId() {
         return id;
     }
