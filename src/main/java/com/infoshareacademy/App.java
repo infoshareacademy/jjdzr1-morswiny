@@ -8,8 +8,8 @@ public class App
 {
     public static void main( String[] args )
     {
-
-        Menu.start();
+        System.out.println("Hello Morswiny!!");
+       // Menu.start();
         
     }
 }

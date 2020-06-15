@@ -1,18 +1,18 @@
 package com.infoshareacademy;
 
 public class Event {
-    String id;
-    Place place;
-    String endDate;
-    String name;
-    EventURL urls;
-    Attachment[] attachments;
-    String descLong;
-    String categoryId;
-    String startDate;
-    Organizer organizer;
-    int active;
-    Ticket tickets;
+    private String id;
+    private Place place;
+    private String endDate;
+    private String name;
+    private EventURL urls;
+    private Attachment[] attachments;
+    private String descLong;
+    private String categoryId;
+    private String startDate;
+    private Organizer organizer;
+    private Integer  active;
+    private Ticket tickets;
 
     public String getId() {
         return id;
@@ -94,11 +94,11 @@ public class Event {
         this.organizer = organizer;
     }
 
-    public int getActive() {
+    public Integer getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 
