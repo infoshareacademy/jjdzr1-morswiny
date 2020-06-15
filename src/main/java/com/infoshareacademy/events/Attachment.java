@@ -1,7 +1,7 @@
 package com.infoshareacademy.events;
 
 public class Attachment {
-    String fileName;
+    private String fileName;
 
     public String getFileName() {
         return fileName;

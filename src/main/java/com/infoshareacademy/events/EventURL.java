@@ -1,6 +1,22 @@
 package com.infoshareacademy.events;
 
 public class EventURL {
-    String www;
-    String tickets;
+    private String www;
+    private String tickets;
+
+    public String getWww() {
+        return www;
+    }
+
+    public void setWww(String www) {
+        this.www = www;
+    }
+
+    public String getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(String tickets) {
+        this.tickets = tickets;
+    }
 }
