@@ -24,13 +24,27 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public void showAllEvents() {
-        for(Event event:eventSet){
-            System.out.println(event.getId());
-            //System.out.println(event.toString());
+        String isActive;
+        for(Event event:eventSet) {
+            if (event.getActive().equals(1)) {
+                isActive = "Active";
+            }
+            else{
+                isActive = "Inactive";
+            }
+            logger.info("Event ID: " + event.getId() + "\n");
+            logger.info("This Event is: " + isActive + "\n");
+            logger.info("Description: "+event.getName() + "\n");
+            logger.info("Place: " + event.getPlace().getSubname()+"\n");
+            logger.info("Organiser: " + event.getOrganizer().getDesignation()+"\n");
+            logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+            logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+
+        }
         }
 
 
-    }
+
 
     @Override
     public void showSingleEvent(Integer eventId) {
