@@ -1,9 +1,13 @@
 package com.infoshareacademy.events;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Date;
 
 public class Event {
-    private String id;
+    private Integer id;
     private Place place;
     private String endDate;
     private String name;
@@ -32,11 +36,11 @@ public class Event {
                 "tickets=" + tickets + '\n' +
                 '}';
     }
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -126,5 +130,24 @@ public class Event {
 
     public void setTickets(Ticket tickets) {
         this.tickets = tickets;
+    }
+
+    public String dateTimeFormatter(String date){
+        String[] dateArray = date.split("T");
+        LocalDate eventDate = LocalDate.parse(dateArray[0]);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        String eventDate1 = eventDate.format(dtf);
+        String eventDateTime = eventDate1 + ", time: " + dateArray[1].substring(0,5);
+        return eventDateTime;
+    }
+
+    public String trimDescription(String description){
+        String trimmedDesc = description.replace("\r", "");
+        trimmedDesc = trimmedDesc.replace("<p>", "");
+        trimmedDesc = trimmedDesc.replace("</p>", "");
+        trimmedDesc = trimmedDesc.replace("<h>", "");
+        trimmedDesc = trimmedDesc.replace("<h>", "");
+        trimmedDesc = trimmedDesc.trim();
+        return trimmedDesc;
     }
 }
