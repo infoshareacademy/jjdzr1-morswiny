@@ -21,13 +21,37 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
         if (choice == 1)
-            STDOUT.info("metoda 1");
+            repository.showAllEvents();
         else if (choice == 2)
             STDOUT.info("metoda 2");
         else if (choice == 3)
             System.exit(0);
         scanner.close();
 
+    }
+
+    public static void menuSingleEvent() {
+
+        EventRepository repository = new EventRepository();
+
+        STDOUT.info("Press 1 to add this event to FAVOURITES\n");
+        STDOUT.info("Press 2 to reserve tickets for this event\n");
+        STDOUT.info("Press 3 to go back to the list of all events\n");
+        STDOUT.info("Press 4 to go back to main menu");
+
+        Scanner scanner = new Scanner(System.in);
+        Integer choice = scanner.nextInt();
+        while (true) {
+            if (choice == 1)
+                STDOUT.info("add to favourites");
+            else if (choice == 2) {
+                STDOUT.info("Reservation system is in development. Please choose another option");
+                choice = scanner.nextInt();
+            } else if (choice == 3)
+                repository.showAllEvents();
+            else if (choice == 4)
+                start();
+        }
     }
 
 }

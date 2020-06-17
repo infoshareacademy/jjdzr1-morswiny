@@ -20,8 +20,8 @@ public class App
         //event.dateTimeFormatter("2020-06-16T23:00:00+0200");
         asd.arrayToSet();
 
-        asd.showAllEvents();
-//        asd.showSingleEvent(71890);
+        //asd.showAllEvents();
+        asd.showSingleEvent(71891);
 
 //        System.out.println(asd.getEventSet().toString());
 
