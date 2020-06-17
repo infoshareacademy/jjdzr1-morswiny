@@ -17,11 +17,15 @@ public class EventRepository implements EventRepositoryInterface {
     }
     @Override
     public boolean createEvent(Event event) {
-        arrayToSet();
         if (event != null){
-            eventSet.add(event);
-            logger.info("New event has been created succesfully! \n" + eventSet.toString());
-            return true;
+            try {
+                eventSet.add(event);
+                //logger.info("New event has been created successfully! \n" + eventSet.toString());
+                return true;
+            } catch (Exception e){
+                logger.info ("Event already existing!");
+                return false;
+            }
         }
         logger.info("Failed! Please try again");
         return false;
@@ -29,7 +33,6 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public boolean deleteEvent(Integer eventId) {
-        arrayToSet();
         logger.info("Event to be deleted: \n");
         showSingleEvent(eventId);
         for (Event event : eventSet) {
@@ -46,7 +49,6 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public boolean updateEventById(Integer eventId) {
-        arrayToSet();
         for (Event event : eventSet) {
             if ((event.getId().equals(eventId))) {
                 logger.info("Please enter new name. To go next hit Enter ");
