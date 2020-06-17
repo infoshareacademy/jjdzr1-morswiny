@@ -1,5 +1,6 @@
 package com.infoshareacademy.events;
 
+import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.*;
@@ -48,6 +49,7 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public void showSingleEvent(Integer eventId) {
+        clearScreen();
         boolean eventFound = false;
         String isActive;
         for (Event event : eventSet) {
@@ -74,14 +76,15 @@ public class EventRepository implements EventRepositoryInterface {
                     if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
                     for (Attachment attachment1 : event.getAttachments())
                         logger.info("/n" + attachment1.getFileName());
-                    break;
+                Menu.menuSingleEvent();
+                break;
             }
         }
         if (!eventFound){
-            logger.info("Event not found! Going back to list of all events in: ");
+            logger.info("Event not found! Going back to list of all events in: \n");
             Integer i = 5;
             while (i>0){
-                logger.info(i.toString() + " ... \n");
+                logger.info(i.toString() + "... \n");
                 try {
                     i--;
                     Thread.sleep(1000L);    // 1000L = 1000ms = 1 second
@@ -122,5 +125,10 @@ public class EventRepository implements EventRepositoryInterface {
 
     public Set<Event> getEventSet() {
         return eventSet;
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
