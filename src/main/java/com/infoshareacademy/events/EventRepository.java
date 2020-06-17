@@ -17,21 +17,29 @@ public class EventRepository implements EventRepositoryInterface {
     }
     @Override
     public boolean createEvent(Event event) {
+        arrayToSet();
         if (event != null){
             eventSet.add(event);
-            logger.info(eventSet.toString());
+            logger.info("New event has been created succesfully! \n" + eventSet.toString());
+            return true;
         }
+        logger.info("Failed! Please try again");
         return false;
     }
 
     @Override
     public boolean deleteEvent(Integer eventId) {
+        arrayToSet();
+        logger.info("Event to be deleted: \n");
+        showSingleEvent(eventId);
         for (Event event : eventSet) {
             if (eventId.equals(event.getId())){
                 eventSet.remove(event);
-                logger.info(eventSet.toString());
+                logger.info("\n\nActual list of events: \n" + eventSet.toString());
+                return true;
             }
         }
+        logger.info("\nFailed! Please try again");
         return false;
     }
 
