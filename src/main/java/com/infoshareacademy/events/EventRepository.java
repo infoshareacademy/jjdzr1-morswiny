@@ -15,7 +15,160 @@ public class EventRepository implements EventRepositoryInterface {
         Set<Event> eventSet1 = new HashSet<>(Arrays.asList(event));
         this.eventSet = eventSet1;
     }
+    @Override
+    public boolean createEvent(Event event) {
+        if (event != null){
+            eventSet.add(event);
+            logger.info(eventSet.toString());
+        }
+        return false;
+    }
 
+    @Override
+    public boolean deleteEvent(Integer eventId) {
+        for (Event event : eventSet) {
+            if (eventId.equals(event.getId())){
+                eventSet.remove(event);
+                logger.info(eventSet.toString());
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean updateEventById(Integer eventId) {
+        arrayToSet();
+        for (Event event : eventSet) {
+            if ((event.getId().equals(eventId))) {
+                logger.info("Please enter new name. To go next hit Enter ");
+                Scanner scanName = new Scanner(System.in);
+                String name = scanName.nextLine();
+                if (!name.equals("")) {
+                    event.setName(name);
+                } else {
+                    event.getName();
+                }
+                logger.info("Please enter new place name. To go next hit Enter ");
+                Scanner scanPlace = new Scanner(System.in);
+                String placeName = scanPlace.nextLine();
+                if (!placeName.equals("")) {
+                    Place place = event.getPlace();
+                    place.setName(placeName);
+                } else {
+                    event.getPlace().getName();
+                }
+                logger.info("Please enter new  place subname. To go next hit Enter ");
+                Scanner scanSubname = new Scanner(System.in);
+                String subname = scanSubname.nextLine();
+                if (!subname.equals("")) {
+                    Place place = event.getPlace();
+                    place.setSubname(subname);
+                } else {
+                    event.getPlace().getSubname();
+                }
+                logger.info("Please enter new start date. To go next hit Enter ");
+                Scanner scanStartDate = new Scanner(System.in);
+                String startDate = scanStartDate.nextLine();
+                if (!startDate.equals("")) {
+                    event.setStartDate(startDate);
+                } else {
+                    event.dateTimeFormatter(event.getStartDate());
+                }
+                logger.info("Please enter new end date. To go next hit Enter ");
+                Scanner scanEndDate = new Scanner(System.in);
+                String endDate = scanEndDate.nextLine();
+                if (!endDate.equals("")) {
+                    event.setEndDate(endDate);
+                } else {
+                    event.dateTimeFormatter(event.getEndDate());
+                }
+                logger.info("Please enter new organizer designation. To go next hit Enter ");
+                Scanner scanOrganizer = new Scanner(System.in);
+                String organizer = scanOrganizer.nextLine();
+                if (!organizer.equals("")) {
+                    Organizer org = event.getOrganizer();
+                    org.setDesignation(organizer);
+                } else {
+                    event.getOrganizer().getDesignation();
+                }
+                logger.info("Please enter new event URL. To go next hit Enter ");
+                Scanner scanUrlWww = new Scanner(System.in);
+                String urlW = scanUrlWww.nextLine();
+                if (!urlW.equals("")) {
+                    EventURL eventURL = event.getUrls();
+                    eventURL.setWww(urlW);
+                } else {
+                    event.getUrls().getWww();
+                }
+                logger.info("Please enter new event URL for tickets. To go next hit Enter ");
+                Scanner scanUrlTicket = new Scanner(System.in);
+                String urlT = scanUrlTicket.nextLine();
+                if (!urlT.equals("")) {
+                    EventURL eventURL = event.getUrls();
+                    eventURL.setTickets(urlT);
+                } else {
+                    event.getUrls().getTickets();
+                }
+                logger.info("Please enter new category ID. To go next hit Enter ");
+                Scanner scanCat = new Scanner(System.in);
+                String cat = scanCat.nextLine();
+                if (!cat.equals("")) {
+                    event.setCategoryId(cat);
+                } else {
+                    event.getCategoryId();
+                }
+                logger.info("Please enter 'yes' if event is active. To go next hit Enter ");
+                Scanner scanActive = new Scanner(System.in);
+                String active = scanActive.nextLine();
+                if (active.equals("yes")) {
+                    event.setActive(1);
+                } else {
+                    event.setActive(0);
+                }
+                logger.info("Please enter new ticket type. To go next hit Enter ");
+                Scanner scanTicketType = new Scanner(System.in);
+                String ticketType = scanCat.nextLine();
+                if (!ticketType.equals("")) {
+                    Ticket ticket = event.getTickets();
+                    ticket.setType(ticketType);
+                } else {
+                    event.getTickets().getType();
+                }
+                logger.info("Please enter new start ticket. To go next hit Enter ");
+                Scanner scanStartT = new Scanner(System.in);
+                String startTicket = scanCat.nextLine();
+                if (!startTicket.equals("")) {
+                    Ticket ticket = event.getTickets();
+                    ticket.setStartTicket(startTicket);
+                } else {
+                    event.getTickets().getStartTicket();
+                }
+                logger.info("Please enter new end ticket. To go next hit Enter ");
+                Scanner scanEndT = new Scanner(System.in);
+                String endTicket = scanCat.nextLine();
+                if (!endTicket.equals("")) {
+                    Ticket ticket = event.getTickets();
+                    ticket.setEndTicket(endTicket);
+                } else {
+                    event.getTickets().getEndTicket();
+                }
+                logger.info("Please enter new attachment. To go next hit Enter ");
+                Scanner scanAttachment = new Scanner(System.in);
+                String attach = scanAttachment.nextLine();
+                if (!attach.equals("")) {
+                    for (Attachment attachment : event.getAttachments()) {
+                        attachment.setFileName(attach);
+                    }
+                } else {
+                    for (Attachment attachment : event.getAttachments()) {
+                        attachment.getFileName();
+                    }
+                } logger.info(event.toString());
+            }
+
+        } return false;
+    }
 
     @Override
     public HashSet<Event> convertEvents(Event[] events) {
