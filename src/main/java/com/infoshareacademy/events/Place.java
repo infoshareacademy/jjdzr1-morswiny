@@ -5,6 +5,12 @@ public class Place {
     private String subname;
     private String name;
 
+    public Place(String id, String subname, String name) {
+        this.id = id;
+        this.subname = subname;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }
@@ -27,5 +33,13 @@ public class Place {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Place " +
+                "id : " + id  +
+                ", subname : " + subname +
+                ", name : " + name;
     }
 }
