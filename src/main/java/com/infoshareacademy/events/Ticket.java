@@ -5,6 +5,20 @@ public class Ticket {
     private String startTicket;
     private String endTicket;
 
+    public Ticket(String type, String startTicket, String endTicket) {
+        this.type = type;
+        this.startTicket = startTicket;
+        this.endTicket = endTicket;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket " +
+                "type = " + type +
+                ", start Ticket = " + startTicket +
+                ", end Ticket = " + endTicket;
+    }
+
     public String getType() {
         return type;
     }

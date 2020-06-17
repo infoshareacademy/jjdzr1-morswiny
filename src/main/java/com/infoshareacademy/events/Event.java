@@ -1,5 +1,6 @@
 package com.infoshareacademy.events;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -8,33 +9,32 @@ import java.util.Date;
 
 public class Event {
     private Integer id;
-    private Place place;
-    private String endDate;
-    private String name;
-    private EventURL urls;
-    private Attachment[] attachments;
+    private Place place;//
+    private String endDate;//
+    private String name;//
+    private EventURL urls;//
+    private Attachment[] attachments;//
     private String descLong;
     private String categoryId;
-    private String startDate;
-    private Organizer organizer;
+    private String startDate;//
+    private Organizer organizer;//
     private Integer  active;
     private Ticket tickets;
 
     @Override
     public String toString() {
-        return "Event{" + '\n'+
-                "id='" + id + '\n' +
-                "place=" + place +
-                "endDate='" + endDate + '\n' +
-                "name='" + name + '\n' +
-                "urls=" + urls +
-                "attachments=" + Arrays.toString(attachments) + '\n' +
-                "categoryId='" + categoryId + '\n' +
-                "startDate='" + startDate + '\n' +
-                "organizer=" + organizer + '\n' +
-                "active=" + active + '\n' +
-                "tickets=" + tickets + '\n' +
-                '}';
+        return "Event " + '\n'+
+                "Id : " + id + '\n' +
+                "Place : " + place + '\n' +
+                "End Date : " + endDate + '\n' +
+                "Name : " + name + '\n' +
+                "Urls : " + urls + '\n' +
+                "Attachments : " + Arrays.toString(attachments)+ '\n' +
+                "Category Id : " + categoryId + '\n' +
+                "Start Date : " + startDate + '\n' +
+                "Organizer : " + organizer + '\n' +
+                "Active : " + active + '\n' +
+                "Tickets : " + tickets + '\n' ;
     }
     public Integer getId() {
         return id;
