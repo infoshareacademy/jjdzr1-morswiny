@@ -63,6 +63,22 @@ public class Event {
                 "Active : " + active + '\n' +
                 "Tickets : " + tickets + '\n' ;
     }
+
+    public String printEventParams() {
+        return
+                ""  + id + '\n'
+                        + '\n' + getPlace() + '\n'
+                        + endDate + '\n'
+                        + name + '\n'
+                        + urls + '\n'
+                        + Arrays.toString(attachments) + '\n'
+                        + categoryId + '\n'
+                        + startDate + '\n'
+                        + organizer + '\n'
+                        + active + '\n'
+                        + tickets + '\n';
+    }
+
     public Integer getId() {
         return id;
     }

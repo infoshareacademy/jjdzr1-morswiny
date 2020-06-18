@@ -267,7 +267,7 @@ public class EventRepository implements EventRepositoryInterface {
     public List<Event> searchByString(String name) {
         List<Event> eventList = new ArrayList<>();
         for (Event event : eventSet) {
-            String eventSpecification = event.toString();
+            String eventSpecification = event.printEventParams();
             if (eventSpecification.contains(name)) {
                 eventList.add(event);
             }
