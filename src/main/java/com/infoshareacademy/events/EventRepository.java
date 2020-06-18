@@ -1,5 +1,6 @@
 package com.infoshareacademy.events;
 
+import com.infoshareacademy.favourites.Favourites;
 import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,53 +51,60 @@ public class EventRepository implements EventRepositoryInterface {
         clearScreen();
         boolean eventFound = false;
         String isActive;
+        Event eventToSend;
         for (Event event : eventSet) {
-            if (event.getId().equals(eventId)){
+            if (event.getId().equals(eventId)) {
                 eventFound = true;
-
-                    if (event.getActive().equals(0)) isActive = "inactive.";
-                    else isActive = "active.";
-                    logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
-                    logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-                    logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
-                    logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
-                    logger.info(event.trimDescription(event.getDescLong()));
-                    if (event.getPlace().getSubname() != null)
-                        logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
-                    else
-                        logger.info("\n\nPlace: " + event.getPlace().getName());
-                    logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
-                    if (event.getTickets().getStartTicket() != null)
-                        logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
-                    if (event.getTickets().getEndTicket() != null)
-                        logger.info("\nGet tickets on " + event.getUrls().getTickets());
-                    logger.info("\n\nEvent URL: " + event.getUrls().getWww());
-                    if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
-                    for (Attachment attachment1 : event.getAttachments())
-                        logger.info("/n" + attachment1.getFileName());
-                Menu.menuSingleEvent();
+                eventToSend = event;
+                if (event.getActive().equals(0)) isActive = "inactive.";
+                else isActive = "active.";
+                logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
+                logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+                logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+                logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
+                logger.info(event.trimDescription(event.getDescLong()));
+                if (event.getPlace().getSubname() != null)
+                    logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+                else
+                    logger.info("\n\nPlace: " + event.getPlace().getName());
+                logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
+                if (event.getTickets().getStartTicket() != null)
+                    logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+                if (event.getTickets().getEndTicket() != null)
+                    logger.info("\nGet tickets on " + event.getUrls().getTickets());
+                logger.info("\n\nEvent URL: " + event.getUrls().getWww());
+                if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
+                for (Attachment attachment1 : event.getAttachments())
+                    logger.info("\n" + attachment1.getFileName());
+                Menu.menuSingleEvent(eventToSend);
                 break;
             }
         }
-        if (!eventFound){
+        if (!eventFound) {
             logger.info("Event not found! Going back to list of all events in: \n");
             Integer i = 5;
-            while (i>0){
+            while (i > 0) {
                 logger.info(i.toString() + "... \n");
                 try {
                     i--;
                     Thread.sleep(1000L);    // 1000L = 1000ms = 1 second
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     logger.info(e.getMessage());
                     showAllEvents();
                 }
-                }
+            }
             showAllEvents();
         }
-
-
     }
+
+        public void addToFavs(Event eventToAdd) {
+                if(!Favourites.getFavourites().contains(eventToAdd)){
+                    Favourites.getFavourites().add(eventToAdd);
+                    logger.info("Event added!");
+                } else {
+                    logger.info("This event is already on the list!");
+                }
+            }
 
     @Override
     public List<Event> searchByString(String name) {

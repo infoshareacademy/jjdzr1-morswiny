@@ -2,6 +2,7 @@ package com.infoshareacademy.navigation;
 
 import com.infoshareacademy.events.Event;
 import com.infoshareacademy.events.EventRepository;
+import com.infoshareacademy.favourites.Favourites;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,9 +12,9 @@ public class Menu {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
     static EventRepository repository = new EventRepository();
+    static Favourites favourites = new Favourites();
 
     public static void start(){
-
 
         repository.arrayToSet();
         EventRepository.clearScreen();
@@ -33,7 +34,7 @@ public class Menu {
 
     }
 
-    public static void menuSingleEvent() {
+    public static void menuSingleEvent(Event eventSent) {
 
         STDOUT.info("\n\nPress 1 to add this event to FAVOURITES\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
@@ -44,8 +45,8 @@ public class Menu {
         Integer choice = scanner.nextInt();
             while (true) {
                 if (choice == 1){
-                    STDOUT.info("add to favourites");
-                    break;
+                    repository.addToFavs(eventSent);
+                    menuSingleEvent(eventSent);
                 } else if (choice == 2) {
                     STDOUT.info("Reservation system is in development. Please choose another option\n");
                     choice = scanner.nextInt();
@@ -54,6 +55,5 @@ public class Menu {
                 else if (choice == 4)
                     start();
             }
-            scanner.close();
         }
     }
