@@ -56,4 +56,26 @@ public class Menu {
                     start();
             }
         }
+    public static void menuSingleFav(Event eventSent) {
+
+        STDOUT.info("\n\nPress 1 to remove this event from FAVOURITES\n");
+        STDOUT.info("Press 2 to reserve tickets for this event\n");
+        STDOUT.info("Press 3 to go to the list of all events\n");
+        STDOUT.info("Press 4 to go back to main menu\n");
+
+        Scanner scanner = new Scanner(System.in);
+        Integer choice = scanner.nextInt();
+        while (true) {
+            if (choice == 1){
+                repository.addToFavs(eventSent);
+                menuSingleEvent(eventSent);
+            } else if (choice == 2) {
+                STDOUT.info("Reservation system is in development. Please choose another option\n");
+                choice = scanner.nextInt();
+            } else if (choice == 3)
+                repository.showAllEvents();
+            else if (choice == 4)
+                start();
+        }
+    }
     }
