@@ -27,24 +27,26 @@ public class EventRepository implements EventRepositoryInterface {
     @Override
     public void showAllEvents() {
         String isActive;
-        for(Event event:eventSet) {
+        for (Event event : eventSet) {
             if (event.getActive().equals(1)) {
                 isActive = "Active";
-            }
-            else{
+            } else {
                 isActive = "Inactive";
             }
             logger.info("Event ID: " + event.getId() + "\n");
             logger.info("This Event is: " + isActive + "\n");
-            logger.info("Description: "+event.getName() + "\n");
-            logger.info("Place: " + event.getPlace().getSubname()+"\n");
-            logger.info("Organiser: " + event.getOrganizer().getDesignation()+"\n");
+            logger.info("Description: " + event.getName() + "\n");
+            logger.info("Place: " + event.getPlace().getSubname() + "\n");
+            logger.info("Organiser: " + event.getOrganizer().getDesignation() + "\n");
             logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
             logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
 
         }
-        }
-
+        logger.info("input id");
+        Scanner scanner = new Scanner(System.in);
+        Integer id = scanner.nextInt();
+        showSingleEvent(id);
+    }
 
     @Override
     public void showSingleEvent(Integer eventId) {
@@ -55,7 +57,7 @@ public class EventRepository implements EventRepositoryInterface {
         for (Event event : eventSet) {
             if (event.getId().equals(eventId)) {
                 eventFound = true;
-                eventToSend = event;
+                //eventToSend = event;
                 if (event.getActive().equals(0)) isActive = "inactive.";
                 else isActive = "active.";
                 logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
@@ -67,7 +69,7 @@ public class EventRepository implements EventRepositoryInterface {
                     logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
                 else
                     logger.info("\n\nPlace: " + event.getPlace().getName());
-                logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
+                logger.info("\nOrganiser: " + event.getOrganizer().getDesignation());
                 if (event.getTickets().getStartTicket() != null)
                     logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
                 if (event.getTickets().getEndTicket() != null)
@@ -76,7 +78,7 @@ public class EventRepository implements EventRepositoryInterface {
                 if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
                 for (Attachment attachment1 : event.getAttachments())
                     logger.info("\n" + attachment1.getFileName());
-                Menu.menuSingleEvent(eventToSend);
+                Menu.menuSingleEvent(event);
                 break;
             }
         }

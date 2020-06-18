@@ -14,10 +14,15 @@ public class Menu {
     static EventRepository repository = new EventRepository();
     static Favourites favourites = new Favourites();
 
+    public static EventRepository getRepository() {
+        return repository;
+    }
+
     public static void start() {
 
         repository.arrayToSet();
         EventRepository.clearScreen();
+        STDOUT.info("Welcome to our programme!\n");
         STDOUT.info("Press 1 to view all events\n");
         STDOUT.info("Press 2 to view favourites\n");
         STDOUT.info("Press 3 to exit\n");
@@ -27,7 +32,7 @@ public class Menu {
         if (choice == 1)
             repository.showAllEvents();
         else if (choice == 2)
-            STDOUT.info("metoda 2");
+            favourites.showFavs();
         else if (choice == 3)
             System.exit(0);
         scanner.close();
@@ -35,8 +40,10 @@ public class Menu {
     }
 
     public static void menuSingleEvent(Event eventSent) {
-
-        STDOUT.info("\n\nPress 1 to add this event to FAVOURITES\n");
+        if (!Favourites.getFavourites().contains(eventSent))
+            STDOUT.info("\n\nThis event is not on your favourites list. Press 1 to add this event to FAVOURITES\n");
+        if (Favourites.getFavourites().contains(eventSent))
+            STDOUT.info("\n\nThis event is on your favourites list. Press 5 to remove it from your favourites\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go back to the list of all events\n");
         STDOUT.info("Press 4 to go back to main menu\n");
@@ -54,6 +61,10 @@ public class Menu {
                 repository.showAllEvents();
             else if (choice == 4)
                 start();
+            else if (choice == 5) {
+                favourites.deleteFromFavs(eventSent);
+                menuSingleEvent(eventSent);
+            }
         }
     }
 
@@ -82,7 +93,7 @@ public class Menu {
 
     public static void menuAllEvents(Integer eventId) {
 
-        STDOUT.info("\n\nPress 1 to view event and all details\n");
+        STDOUT.info("\nPress 1 to view event and all details\n");
         STDOUT.info("Press 2 to go back to main menu\n");
 
         Scanner scanner = new Scanner(System.in);
