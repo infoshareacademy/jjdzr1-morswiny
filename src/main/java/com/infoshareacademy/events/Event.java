@@ -147,6 +147,8 @@ public class Event {
         trimmedDesc = trimmedDesc.replace("</p>", "");
         trimmedDesc = trimmedDesc.replace("<h>", "");
         trimmedDesc = trimmedDesc.replace("<h>", "");
+        trimmedDesc = trimmedDesc.replace("<br>", " ");
+        trimmedDesc = trimmedDesc.replace("</br>", "");
         trimmedDesc = trimmedDesc.trim();
         return trimmedDesc;
     }

@@ -45,8 +45,6 @@ public class EventRepository implements EventRepositoryInterface {
         }
 
 
-
-
     @Override
     public void showSingleEvent(Integer eventId) {
         clearScreen();
