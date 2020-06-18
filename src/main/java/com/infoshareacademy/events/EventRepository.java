@@ -97,14 +97,6 @@ public class EventRepository implements EventRepositoryInterface {
         }
     }
 
-        public void addToFavs(Event eventToAdd) {
-                if(!Favourites.getFavourites().contains(eventToAdd)){
-                    Favourites.getFavourites().add(eventToAdd);
-                    logger.info("Event added!");
-                } else {
-                    logger.info("This event is already on the list!");
-                }
-            }
 
     @Override
     public List<Event> searchByString(String name) {

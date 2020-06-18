@@ -1,6 +1,7 @@
 package com.infoshareacademy.favourites;
 
 import com.infoshareacademy.events.Event;
+import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,14 +29,25 @@ public class Favourites {
     public void showFavs() {
         if (!favList.isEmpty()) {
             for (Event event : favList) {
-            logger.info("Event ID: " + event.getId() + "\n");
-            logger.info(event.getName());
-            logger.info(" @ " + event.getPlace());
-            logger.info("Organiser: " + event.getOrganizer().getDesignation() + "\n");
-            logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+                logger.info("Event ID: " + event.getId() + "\n");
+                logger.info(event.getName());
+                logger.info(" @ " + event.getPlace());
+                logger.info("Organiser: " + event.getOrganizer().getDesignation() + "\n");
+                logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+            }
+        } else
+            logger.info("\nThe list is empty!\n");
+
+
+
+    }
+    public void addToFavs(Event eventToAdd) {
+        if(!Favourites.getFavourites().contains(eventToAdd)){
+            Favourites.getFavourites().add(eventToAdd);
+            logger.info("Event added!");
+        } else {
+            logger.info("This event is already on the list!");
         }
     }
 
     }
-
-}
