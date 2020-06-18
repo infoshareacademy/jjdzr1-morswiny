@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 
 public class Event {
     private Integer id;
@@ -20,6 +21,32 @@ public class Event {
     private Organizer organizer;//
     private Integer  active;
     private Ticket tickets;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(id, event.id) &&
+                Objects.equals(place, event.place) &&
+                Objects.equals(endDate, event.endDate) &&
+                Objects.equals(name, event.name) &&
+                Objects.equals(urls, event.urls) &&
+                Arrays.equals(attachments, event.attachments) &&
+                Objects.equals(descLong, event.descLong) &&
+                Objects.equals(categoryId, event.categoryId) &&
+                Objects.equals(startDate, event.startDate) &&
+                Objects.equals(organizer, event.organizer) &&
+                Objects.equals(active, event.active) &&
+                Objects.equals(tickets, event.tickets);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, place, endDate, name, urls, descLong, categoryId, startDate, organizer, active, tickets);
+        result = 31 * result + Arrays.hashCode(attachments);
+        return result;
+    }
 
     @Override
     public String toString() {
