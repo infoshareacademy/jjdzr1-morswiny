@@ -1,9 +1,10 @@
 package com.infoshareacademy.events;
 
-import com.infoshareacademy.favourites.Favourites;
 import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 import java.util.*;
 
 public class EventRepository implements EventRepositoryInterface {
@@ -78,7 +79,11 @@ public class EventRepository implements EventRepositoryInterface {
                 if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
                 for (Attachment attachment1 : event.getAttachments())
                     logger.info("\n" + attachment1.getFileName());
-                Menu.menuSingleEvent(event);
+                try {
+                    Menu.menuSingleEvent(event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
         }

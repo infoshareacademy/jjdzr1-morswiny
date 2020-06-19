@@ -6,21 +6,28 @@ import com.infoshareacademy.favourites.Favourites;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    static EventRepository repository = new EventRepository();
-    static Favourites favourites = new Favourites();
+    static EventRepository repository;
+    static Favourites favourites;
 
     public static EventRepository getRepository() {
         return repository;
     }
 
-    public static void start() {
-
+    public static void programStart() throws IOException {
+        repository = new EventRepository();
+        favourites = new Favourites();
         repository.arrayToSet();
+        start();
+    }
+
+    public static void start() throws IOException {
+
         EventRepository.clearScreen();
         STDOUT.info("Welcome to our programme!\n");
         STDOUT.info("Press 1 to view all events\n");
@@ -39,7 +46,7 @@ public class Menu {
 
     }
 
-    public static void menuSingleEvent(Event eventSent) {
+    public static void menuSingleEvent(Event eventSent) throws IOException {
         if (!Favourites.getFavourites().contains(eventSent))
             STDOUT.info("\n\nThis event is not on your favourites list. Press 1 to add this event to FAVOURITES\n");
         if (Favourites.getFavourites().contains(eventSent))
@@ -68,9 +75,9 @@ public class Menu {
         }
     }
 
-    public static void menuSingleFav(Event eventSent) {
+    public static void menuSingleFav(Event eventSent) throws IOException {
 
-        STDOUT.info("\n\nPress 1 to remove this event from FAVOURITES\n");
+        STDOUT.info("\n\nPress 1 to remove this event from Favourites\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go to the list of all events\n");
         STDOUT.info("Press 4 to go back to main menu\n");

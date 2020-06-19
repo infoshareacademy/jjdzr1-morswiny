@@ -4,6 +4,8 @@ import com.infoshareacademy.events.Event;
 import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,7 +28,7 @@ public class Favourites {
         }
     }
 
-    public void showFavs() {
+    public void showFavs() throws IOException {
         if (!favList.isEmpty()) {
             Integer i = 1;
             for (Event event : favList) {
@@ -41,9 +43,8 @@ public class Favourites {
         } else
             logger.info("\nThe list is empty!\n");
 
-
         if (!favList.isEmpty())
-        logger.info("\n\nPress 1 to view event with all details\n");
+            logger.info("\n\nPress 1 to view event with all details\n");
         logger.info("Press 2 to go back to main menu\n");
 
         Scanner scanner = new Scanner(System.in);
@@ -67,5 +68,4 @@ public class Favourites {
             logger.info("This event is already on the list!");
         }
     }
-
-    }
+}

@@ -1,5 +1,6 @@
 package com.infoshareacademy.events;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,7 @@ public interface EventRepositoryInterface {
     HashSet<Event> convertEvents(Event[] events);
 
     //zwroc all events  <--Mateusz
-    void showAllEvents();
+    void showAllEvents() throws IOException;
 
     //zwroc pojedyczny el.  <--Kuba
     void showSingleEvent(Integer eventId);
