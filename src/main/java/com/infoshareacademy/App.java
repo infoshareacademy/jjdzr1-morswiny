@@ -26,8 +26,10 @@ public class App {
 
 //        System.out.println(asd.getEventSet().toString());
 
-        Integer active = asd.getInputForActive();
-        System.out.println(asd.searchActive(active));
+//        Integer active = asd.getInputForActive();
+//        System.out.println(asd.searchActive(active));
+        String place ="Winda";
+        System.out.println(asd.searchByPlace(place));
 
     }
 }

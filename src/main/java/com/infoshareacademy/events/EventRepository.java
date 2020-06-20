@@ -311,9 +311,9 @@ public class EventRepository implements EventRepositoryInterface {
         List<Event> list = new ArrayList();
         for (Event event : eventSet) {
             String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
-            if (place.toLowerCase()
+            if (nameAndSubname.toLowerCase()
                     .contains(
-                            nameAndSubname.toLowerCase())) {
+                            place.toLowerCase())) {
                 list.add(event);
             }
         }
