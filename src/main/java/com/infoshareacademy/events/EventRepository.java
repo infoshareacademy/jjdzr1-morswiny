@@ -321,6 +321,17 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
+    public List<Event> searchActive(Integer active) {
+        List<Event> list = new ArrayList();
+        for (Event event: eventSet){
+            if (event.getActive().equals(active)) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+    @Override
     public List<Event> searchByInteger(Integer name) {
         return null;
     }

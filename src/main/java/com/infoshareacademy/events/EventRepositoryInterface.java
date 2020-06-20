@@ -46,6 +46,7 @@ public interface EventRepositoryInterface {
     List<Event> searchByPlace (String place);
 
     //wyszukiwanie aktywnych/nieaktywnych eventow
+    List<Event> searchActive (Integer active);
 
     //filtrowanie eventow po nazwie == sortowanie
     List<Event> filterEvents();
