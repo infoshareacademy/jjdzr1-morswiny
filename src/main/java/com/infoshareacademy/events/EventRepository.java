@@ -321,15 +321,31 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
+    // 1 if active, 0 if inactive
     public List<Event> searchActive(Integer active) {
         List<Event> list = new ArrayList();
-        for (Event event: eventSet){
+        for (Event event : eventSet) {
             if (event.getActive().equals(active)) {
                 list.add(event);
             }
         }
         return list;
     }
+
+    public Integer getInputForActive() {
+        Scanner scanner = new Scanner(System.in);
+        Integer userInput;
+        while (true) {
+            logger.info("\nSelect 1 if you want to search for active events, select 0 for inactive events.\n");
+            userInput = scanner.nextInt();
+            if (userInput.equals(1) || userInput.equals(0)) {
+                return userInput;
+            } else {
+                logger.info("\nIncorrect value provided.");
+            }
+        }
+    }
+
 
     @Override
     public List<Event> searchByInteger(Integer name) {

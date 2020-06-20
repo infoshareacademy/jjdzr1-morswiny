@@ -9,15 +9,11 @@ import java.util.List;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main(String[] args) {
 
         //Menu.start();
-
 
 
         EventRepository asd = new EventRepository();
@@ -30,9 +26,8 @@ public class App
 
 //        System.out.println(asd.getEventSet().toString());
 
-        String userInput = asd.getUserQuery();
-        List<Event> list = new ArrayList<>();
-        list =asd.searchByString(userInput);
-        
+        Integer active = asd.getInputForActive();
+        System.out.println(asd.searchActive(active));
+
     }
 }
