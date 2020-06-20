@@ -18,34 +18,29 @@ public class EventRepository implements EventRepositoryInterface {
     }
     @Override
     public boolean createEvent(Event event) {
-        if (event != null){
-            try {
-                eventSet.add(event);
-                //logger.info("New event has been created successfully! \n" + eventSet.toString());
-                return true;
-            } catch (Exception e){
-                logger.info ("Event already existing!");
-                return false;
-            }
+        if (eventSet.add(event)){
+            eventSet.add(event);
+            logger.info("New event has been created successfully! \n" + event);
+            return true;
+        } else {
+            logger.info("Event already existing!");
+            return false;
         }
-        logger.info("Failed! Please try again");
-        return false;
     }
 
     @Override
     public boolean deleteEvent(Integer eventId) {
-        logger.info("Event to be deleted: \n");
-        showSingleEvent(eventId);
         for (Event event : eventSet) {
             if (eventId.equals(event.getId())){
                 eventSet.remove(event);
-                logger.info("\n\nActual list of events: \n" + eventSet.toString());
+                logger.info("Event has been deleted");
                 return true;
             }
         }
         logger.info("\nFailed! Please try again");
         return false;
     }
+
 
 
     @Override
