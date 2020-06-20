@@ -293,6 +293,21 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
+    public List<Event> searchByOrganizer(String organizer) {
+        List<Event> list = new ArrayList<>();
+        for (Event event : eventSet) {
+            if (event.getOrganizer().getDesignation().toLowerCase()
+                    .contains
+                            (organizer.toLowerCase())) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+
+
+    @Override
     public List<Event> searchByInteger(Integer name) {
         return null;
     }

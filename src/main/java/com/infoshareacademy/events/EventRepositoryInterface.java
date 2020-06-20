@@ -40,7 +40,11 @@ public interface EventRepositoryInterface {
     //wyszukiwanie po dacie
 
     //wyszukiwanie po organizatorze
+    List <Event> searchByOrganizer (String organizer);
 
+    //wyszukiwanie po miejscu
+
+    //wyszukiwanie aktywnych/nieaktywnych eventow
 
     //filtrowanie eventow po nazwie == sortowanie
     List<Event> filterEvents();
