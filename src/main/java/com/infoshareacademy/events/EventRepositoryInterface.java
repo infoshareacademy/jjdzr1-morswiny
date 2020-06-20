@@ -43,6 +43,7 @@ public interface EventRepositoryInterface {
     List <Event> searchByOrganizer (String organizer);
 
     //wyszukiwanie po miejscu
+    List<Event> searchByPlace (String place);
 
     //wyszukiwanie aktywnych/nieaktywnych eventow
 

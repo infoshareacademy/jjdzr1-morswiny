@@ -4,6 +4,7 @@ import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class EventRepository implements EventRepositoryInterface {
@@ -296,16 +297,28 @@ public class EventRepository implements EventRepositoryInterface {
     public List<Event> searchByOrganizer(String organizer) {
         List<Event> list = new ArrayList<>();
         for (Event event : eventSet) {
-            if (event.getOrganizer().getDesignation().toLowerCase()
+            if (organizer.toLowerCase()
                     .contains
-                            (organizer.toLowerCase())) {
+                            (event.getOrganizer().getDesignation().toLowerCase())) {
                 list.add(event);
             }
         }
         return list;
     }
 
-
+    @Override
+    public List<Event> searchByPlace(String place) {
+        List<Event> list = new ArrayList();
+        for (Event event : eventSet) {
+            String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
+            if (place.toLowerCase()
+                    .contains(
+                            nameAndSubname.toLowerCase())) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
 
     @Override
     public List<Event> searchByInteger(Integer name) {
