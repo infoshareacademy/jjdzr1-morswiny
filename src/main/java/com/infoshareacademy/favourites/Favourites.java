@@ -44,7 +44,7 @@ public class Favourites {
             logger.info("\nThe list is empty!\n");
 
         if (!favList.isEmpty())
-            logger.info("\n\nPress 1 to view event with all details\n");
+            logger.info("\nPress 1 to view event with all details\n");
         logger.info("Press 2 to go back to main menu\n");
 
         Scanner scanner = new Scanner(System.in);

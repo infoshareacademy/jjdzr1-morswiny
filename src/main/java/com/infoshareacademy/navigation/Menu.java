@@ -72,9 +72,9 @@ public class Menu {
 
     public static void menuSingleEvent(Event eventSent) throws IOException {
         if (!Favourites.getFavourites().contains(eventSent))
-            STDOUT.info("\n\nThis event is not on your favourites list. Press 1 to add this event to FAVOURITES\n");
+            STDOUT.info("\n\n*This event is not on your favourites list.* \nPress 1 to add this event to FAVOURITES\n");
         if (Favourites.getFavourites().contains(eventSent))
-            STDOUT.info("\n\nThis event is on your favourites list. Press 5 to remove it from your favourites\n");
+            STDOUT.info("\n\n*This event is on your favourites list.* \nPress 5 to remove it from your favourites\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go back to the list of all events\n");
         STDOUT.info("Press 4 to go back to main menu\n");

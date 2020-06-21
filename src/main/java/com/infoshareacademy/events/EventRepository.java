@@ -215,7 +215,6 @@ public class EventRepository implements EventRepositoryInterface {
         Menu.menuAllEvents();
     }
 
-
     @Override
     public void showSingleEvent(Integer eventId) throws IOException {
         clearScreen();
