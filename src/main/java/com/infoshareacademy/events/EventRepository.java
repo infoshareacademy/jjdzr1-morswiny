@@ -35,7 +35,7 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
-    public boolean deleteEvent(Integer eventId) {
+    public boolean deleteEvent(Integer eventId) throws IOException {
         logger.info("Event to be deleted: \n");
         showSingleEvent(eventId);
         for (Event event : eventSet) {
@@ -191,7 +191,7 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
-    public void showAllEvents() {
+    public void showAllEvents() throws IOException {
         clearScreen();
         String isActive;
         for (Event event : eventSet) {
@@ -208,15 +208,16 @@ public class EventRepository implements EventRepositoryInterface {
             logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
             logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
 
-            Menu.menuAllEvents();
+
             //break;
 
         }
+        Menu.menuAllEvents();
     }
 
 
     @Override
-    public void showSingleEvent(Integer eventId) {
+    public void showSingleEvent(Integer eventId) throws IOException {
         clearScreen();
         boolean eventFound = false;
         String isActive;
@@ -244,7 +245,7 @@ public class EventRepository implements EventRepositoryInterface {
                     if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
                     for (Attachment attachment1 : event.getAttachments())
                         logger.info("/n" + attachment1.getFileName());
-                Menu.menuSingleEvent();
+                Menu.menuSingleEvent(event);
                 break;
             }
         }
@@ -263,8 +264,6 @@ public class EventRepository implements EventRepositoryInterface {
             }
             showAllEvents();
         }
-    }
-
     }
 
     public String getUserQuery() {

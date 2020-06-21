@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class Menu {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    static EventRepository repository;
-    static Favourites favourites;
+    static EventRepository repository = new EventRepository();
+    static Favourites favourites = new Favourites();
 
     public static EventRepository getRepository() {
         return repository;
@@ -46,7 +46,7 @@ public class Menu {
 
     }
 
-    public static void menuAllEvents(){
+    public static void menuAllEvents() throws IOException {
 
         EventRepository eventRepository = new EventRepository();
         STDOUT.info("\n\nPress 1 to go to detailed information about Event\n");
@@ -60,22 +60,16 @@ public class Menu {
                 STDOUT.info("show single event\n"); //wstepnie
                 STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
                 Integer choiceSingleEvent = scanner.nextInt();
-                eventRepository.showSingleEvent(choiceSingleEvent);
+                repository.showSingleEvent(choiceSingleEvent);
 
             }else if(choice==2){
-                start();
+               start();
             }
 
         }
 
     }
 
-
-
-    public static void menuSingleEvent() {
-
-        EventRepository repository = new EventRepository();
-        STDOUT.info("\n\nPress 1 to add this event to FAVOURITES\n");
     public static void menuSingleEvent(Event eventSent) throws IOException {
         if (!Favourites.getFavourites().contains(eventSent))
             STDOUT.info("\n\nThis event is not on your favourites list. Press 1 to add this event to FAVOURITES\n");
@@ -128,7 +122,7 @@ public class Menu {
         }
     }
 
-    public static void menuAllEvents(Integer eventId) {
+    public static void menuAllEvents(Integer eventId) throws IOException {
 
         STDOUT.info("\nPress 1 to view event and all details\n");
         STDOUT.info("Press 2 to go back to main menu\n");

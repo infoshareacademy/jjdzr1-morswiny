@@ -1,12 +1,12 @@
 package com.infoshareacademy.events;
 
-import java.lang.reflect.Array;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Objects;
+import java.util.Properties;
 
 public class Event {
     private Integer id;
@@ -173,7 +173,7 @@ public class Event {
     }
 
     public String dateTimeFormatter(String date) {
-        Properties prop = readPropertiesFile("credentials.properties");
+        Properties prop = readPropertiesFile("/src/main/resources/config.properties");
         String[] dateArray = date.split("T");
         LocalDate eventDate = LocalDate.parse(dateArray[0]);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
@@ -189,8 +189,6 @@ public class Event {
             property = new FileInputStream("src/main/resources/config.properties");
             prop = new Properties();
             prop.load(property);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
