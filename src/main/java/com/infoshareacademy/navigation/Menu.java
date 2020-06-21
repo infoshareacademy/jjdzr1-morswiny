@@ -1,18 +1,35 @@
 package com.infoshareacademy.navigation;
 
+import com.infoshareacademy.events.Event;
 import com.infoshareacademy.events.EventRepository;
+import com.infoshareacademy.favourites.Favourites;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public static void start(){
-        EventRepository repository = new EventRepository();
+    static EventRepository repository = new EventRepository();
+    static Favourites favourites = new Favourites();
+
+    public static EventRepository getRepository() {
+        return repository;
+    }
+
+    public static void programStart() throws IOException {
+        repository = new EventRepository();
+        favourites = new Favourites();
         repository.arrayToSet();
+        start();
+    }
+
+    public static void start() throws IOException {
+
         EventRepository.clearScreen();
+        STDOUT.info("Welcome to our programme!\n");
         STDOUT.info("Press 1 to view all events\n");
         STDOUT.info("Press 2 to view favourites\n");
         STDOUT.info("Press 3 to exit\n");
@@ -22,35 +39,87 @@ public class Menu {
         if (choice == 1)
             repository.showAllEvents();
         else if (choice == 2)
-            STDOUT.info("metoda 2");
+            favourites.showFavs();
         else if (choice == 3)
             System.exit(0);
         scanner.close();
 
     }
 
-    public static void menuSingleEvent() {
+    public static void menuAllEvents() throws IOException {
 
-        EventRepository repository = new EventRepository();
-        STDOUT.info("\n\nPress 1 to add this event to FAVOURITES\n");
+        EventRepository eventRepository = new EventRepository();
+        STDOUT.info("\n\nPress 1 to go to detailed information about Event\n");
+        STDOUT.info("Press 2 to go back to Main Menu\n");
+
+        Scanner scanner = new Scanner(System.in);
+        Integer choice = scanner.nextInt();
+
+        while(true){
+            if(choice==1){
+                STDOUT.info("show single event\n"); //wstepnie
+                STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
+                Integer choiceSingleEvent = scanner.nextInt();
+                repository.showSingleEvent(choiceSingleEvent);
+
+            }else if(choice==2){
+               start();
+            }
+
+        }
+
+    }
+
+    public static void menuSingleEvent(Event eventSent) throws IOException {
+        if (!Favourites.getFavourites().contains(eventSent))
+            STDOUT.info("\n\n*This event is not on your favourites list.* \nPress 1 to add this event to FAVOURITES\n");
+        if (Favourites.getFavourites().contains(eventSent))
+            STDOUT.info("\n\n*This event is on your favourites list.* \nPress 5 to remove it from your favourites\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go back to the list of all events\n");
         STDOUT.info("Press 4 to go back to main menu\n");
 
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
-            while (true) {
-                if (choice == 1){
-                    STDOUT.info("add to favourites");
-                    break;
-                }
-                else if (choice == 2) {
-                    STDOUT.info("Reservation system is in development. Please choose another option\n");
-                    choice = scanner.nextInt();
-                } else if (choice == 3)
-                    repository.showAllEvents();
-                else if (choice == 4)
-                    start();
+        while (true) {
+            if (choice == 1) {
+                favourites.addToFavs(eventSent);
+                menuSingleEvent(eventSent);
+            } else if (choice == 2) {
+                STDOUT.info("Reservation system is in development. Please choose another option\n");
+                choice = scanner.nextInt();
+            } else if (choice == 3)
+                repository.showAllEvents();
+            else if (choice == 4)
+                start();
+            else if (choice == 5) {
+                favourites.deleteFromFavs(eventSent);
+                menuSingleEvent(eventSent);
             }
         }
     }
+
+    public static void menuSingleFav(Event eventSent) throws IOException {
+
+        STDOUT.info("\n\nPress 1 to remove this event from Favourites\n");
+        STDOUT.info("Press 2 to reserve tickets for this event\n");
+        STDOUT.info("Press 3 to go to the list of all events\n");
+        STDOUT.info("Press 4 to go back to main menu\n");
+
+        Scanner scanner = new Scanner(System.in);
+        Integer choice = scanner.nextInt();
+        while (true) {
+            if (choice == 1) {
+                favourites.deleteFromFavs(eventSent);
+                menuSingleEvent(eventSent);
+            } else if (choice == 2) {
+                STDOUT.info("Reservation system is in development. Please choose another option\n");
+                choice = scanner.nextInt();
+            } else if (choice == 3)
+                repository.showAllEvents();
+            else if (choice == 4)
+                start();
+        }
+    }
+
+}

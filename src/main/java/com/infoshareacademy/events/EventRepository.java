@@ -3,8 +3,7 @@ package com.infoshareacademy.events;
 import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.util.*;
 
 public class EventRepository implements EventRepositoryInterface {
@@ -19,36 +18,35 @@ public class EventRepository implements EventRepositoryInterface {
         this.eventSet = eventSet1;
     }
 
+    private boolean eventExist(Event event) {
+        return Objects.nonNull(event) && eventSet.contains(event);
+    }
+
     @Override
     public boolean createEvent(Event event) {
-        if (event != null) {
-            try {
-                eventSet.add(event);
-                //logger.info("New event has been created successfully! \n" + eventSet.toString());
-                return true;
-            } catch (Exception e) {
-                logger.info("Event already existing!");
-                return false;
-            }
+        if (!eventExist(event)){
+            eventSet.add(event);
+            logger.info("New event has been created successfully! \n" + event);
+            return true;
+        } else {
+            logger.info("Event already existing or not defined!");
+            return false;
         }
-        logger.info("Failed! Please try again");
-        return false;
     }
 
     @Override
     public boolean deleteEvent(Integer eventId) {
-        logger.info("Event to be deleted: \n");
-        showSingleEvent(eventId);
         for (Event event : eventSet) {
-            if (eventId.equals(event.getId())) {
+            if (eventId.equals(event.getId())){
                 eventSet.remove(event);
-                logger.info("\n\nActual list of events: \n" + eventSet.toString());
+                logger.info("Event has been deleted");
                 return true;
             }
         }
         logger.info("\nFailed! Please try again");
         return false;
     }
+
 
 
     @Override
@@ -192,7 +190,8 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
-    public void showAllEvents() {
+    public void showAllEvents() throws IOException {
+        clearScreen();
         String isActive;
         for (Event event : eventSet) {
             if (event.getActive().equals(1)) {
@@ -209,11 +208,11 @@ public class EventRepository implements EventRepositoryInterface {
             logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
 
         }
+        Menu.menuAllEvents();
     }
 
-
     @Override
-    public void showSingleEvent(Integer eventId) {
+    public void showSingleEvent(Integer eventId) throws IOException {
         clearScreen();
         boolean eventFound = false;
         String isActive;
@@ -221,27 +220,27 @@ public class EventRepository implements EventRepositoryInterface {
             if (event.getId().equals(eventId)) {
                 eventFound = true;
 
-                if (event.getActive().equals(0)) isActive = "inactive.";
-                else isActive = "active.";
-                logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
-                logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-                logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
-                logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
-                logger.info(event.trimDescription(event.getDescLong()));
-                if (event.getPlace().getSubname() != null)
-                    logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
-                else
-                    logger.info("\n\nPlace: " + event.getPlace().getName());
-                logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
-                if (event.getTickets().getStartTicket() != null)
-                    logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
-                if (event.getTickets().getEndTicket() != null)
-                    logger.info("\nGet tickets on " + event.getUrls().getTickets());
-                logger.info("\n\nEvent URL: " + event.getUrls().getWww());
-                if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
-                for (Attachment attachment1 : event.getAttachments())
-                    logger.info("/n" + attachment1.getFileName());
-                Menu.menuSingleEvent();
+                    if (event.getActive().equals(0)) isActive = "inactive.";
+                    else isActive = "active.";
+                    logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
+                    logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+                    logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+                    logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
+                    logger.info(event.trimDescription(event.getDescLong()));
+                    if (event.getPlace().getSubname() != null)
+                        logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+                    else
+                        logger.info("\n\nPlace: " + event.getPlace().getName());
+                    logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
+                    if (event.getTickets().getStartTicket() != null)
+                        logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+                    if (event.getTickets().getEndTicket() != null)
+                        logger.info("\nGet tickets on " + event.getUrls().getTickets());
+                    logger.info("\n\nEvent URL: " + event.getUrls().getWww());
+                    if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
+                    for (Attachment attachment1 : event.getAttachments())
+                        logger.info("/n" + attachment1.getFileName());
+                Menu.menuSingleEvent(event);
                 break;
             }
         }
@@ -260,8 +259,6 @@ public class EventRepository implements EventRepositoryInterface {
             }
             showAllEvents();
         }
-
-
     }
 
     public String getUserQuery() {
