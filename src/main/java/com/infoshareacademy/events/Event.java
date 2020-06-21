@@ -1,24 +1,24 @@
 package com.infoshareacademy.events;
 
-import java.lang.reflect.Array;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Objects;
+import java.util.Properties;
 
 public class Event {
     private Integer id;
-    private Place place;//
-    private String endDate;//
-    private String name;//
-    private EventURL urls;//
-    private Attachment[] attachments;//
+    private Place place;
+    private String endDate;
+    private String name;
+    private EventURL urls;
+    private Attachment[] attachments;
     private String descLong;
     private String categoryId;
-    private String startDate;//
-    private Organizer organizer;//
+    private String startDate;
+    private Organizer organizer;
     private Integer  active;
     private Ticket tickets;
 
@@ -172,21 +172,51 @@ public class Event {
         this.tickets = tickets;
     }
 
-    public String dateTimeFormatter(String date){
+    public String dateTimeFormatter(String date) {
+        Properties prop = readPropertiesFile("/src/main/resources/config.properties");
         String[] dateArray = date.split("T");
         LocalDate eventDate = LocalDate.parse(dateArray[0]);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
         String eventDate1 = eventDate.format(dtf);
         String eventDateTime = eventDate1 + ", time: " + dateArray[1].substring(0,5);
         return eventDateTime;
     }
 
+    public static Properties readPropertiesFile(String fileName) {
+        FileInputStream property = null;
+        Properties prop = null;
+        try {
+            property = new FileInputStream("src/main/resources/config.properties");
+            prop = new Properties();
+            prop.load(property);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            assert property != null;
+            try {
+                property.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return prop;
+    }
     public String trimDescription(String description){
         String trimmedDesc = description.replace("\r", "");
         trimmedDesc = trimmedDesc.replace("<p>", "");
         trimmedDesc = trimmedDesc.replace("</p>", "");
+        trimmedDesc = trimmedDesc.replace("<p1>", "");
+        trimmedDesc = trimmedDesc.replace("</p1>", "");
         trimmedDesc = trimmedDesc.replace("<h>", "");
-        trimmedDesc = trimmedDesc.replace("<h>", "");
+        trimmedDesc = trimmedDesc.replace("</h>", "");
+        trimmedDesc = trimmedDesc.replace("<h1>", "");
+        trimmedDesc = trimmedDesc.replace("</h1>", "");
+        trimmedDesc = trimmedDesc.replace("<h2>", "");
+        trimmedDesc = trimmedDesc.replace("</h2>", "");
+        trimmedDesc = trimmedDesc.replace("<b>", "");
+        trimmedDesc = trimmedDesc.replace("</b>", "");
+        trimmedDesc = trimmedDesc.replace("<br>", " ");
+        trimmedDesc = trimmedDesc.replace("</br>", "");
         trimmedDesc = trimmedDesc.trim();
         return trimmedDesc;
     }
