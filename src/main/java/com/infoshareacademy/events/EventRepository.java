@@ -3,7 +3,7 @@ package com.infoshareacademy.events;
 import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import java.io.IOException;
 import java.util.*;
 
 public class EventRepository implements EventRepositoryInterface {
@@ -35,7 +35,7 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
-    public boolean deleteEvent(Integer eventId) {
+    public boolean deleteEvent(Integer eventId) throws IOException {
         logger.info("Event to be deleted: \n");
         showSingleEvent(eventId);
         for (Event event : eventSet) {
@@ -191,7 +191,7 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
-    public void showAllEvents() {
+    public void showAllEvents() throws IOException {
         clearScreen();
         String isActive;
         for (Event event : eventSet) {
@@ -208,15 +208,12 @@ public class EventRepository implements EventRepositoryInterface {
             logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
             logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
 
-            Menu.menuAllEvents();
-            //break;
-
         }
+        Menu.menuAllEvents();
     }
 
-
     @Override
-    public void showSingleEvent(Integer eventId) {
+    public void showSingleEvent(Integer eventId) throws IOException {
         clearScreen();
         boolean eventFound = false;
         String isActive;
@@ -224,27 +221,27 @@ public class EventRepository implements EventRepositoryInterface {
             if (event.getId().equals(eventId)) {
                 eventFound = true;
 
-                if (event.getActive().equals(0)) isActive = "inactive.";
-                else isActive = "active.";
-                logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
-                logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-                logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
-                logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
-                logger.info(event.trimDescription(event.getDescLong()));
-                if (event.getPlace().getSubname() != null)
-                    logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
-                else
-                    logger.info("\n\nPlace: " + event.getPlace().getName());
-                logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
-                if (event.getTickets().getStartTicket() != null)
-                    logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
-                if (event.getTickets().getEndTicket() != null)
-                    logger.info("\nGet tickets on " + event.getUrls().getTickets());
-                logger.info("\n\nEvent URL: " + event.getUrls().getWww());
-                if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
-                for (Attachment attachment1 : event.getAttachments())
-                    logger.info("/n" + attachment1.getFileName());
-                Menu.menuSingleEvent();
+                    if (event.getActive().equals(0)) isActive = "inactive.";
+                    else isActive = "active.";
+                    logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
+                    logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+                    logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+                    logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
+                    logger.info(event.trimDescription(event.getDescLong()));
+                    if (event.getPlace().getSubname() != null)
+                        logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+                    else
+                        logger.info("\n\nPlace: " + event.getPlace().getName());
+                    logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
+                    if (event.getTickets().getStartTicket() != null)
+                        logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+                    if (event.getTickets().getEndTicket() != null)
+                        logger.info("\nGet tickets on " + event.getUrls().getTickets());
+                    logger.info("\n\nEvent URL: " + event.getUrls().getWww());
+                    if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
+                    for (Attachment attachment1 : event.getAttachments())
+                        logger.info("/n" + attachment1.getFileName());
+                Menu.menuSingleEvent(event);
                 break;
             }
         }
@@ -263,8 +260,6 @@ public class EventRepository implements EventRepositoryInterface {
             }
             showAllEvents();
         }
-
-
     }
 
     public String getUserQuery() {

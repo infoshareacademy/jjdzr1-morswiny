@@ -1,5 +1,6 @@
 package com.infoshareacademy.events;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +17,7 @@ public interface EventRepositoryInterface {
     boolean createEvent(Event event);
 
     //delete existing event
-    boolean deleteEvent(Integer eventId);
+    boolean deleteEvent(Integer eventId) throws IOException;
 
     //update event by id
     boolean updateEventById(Integer eventId);
@@ -26,10 +27,10 @@ public interface EventRepositoryInterface {
     HashSet<Event> convertEvents(Event[] events);
 
     //zwroc all events  <--Mateusz
-    void showAllEvents();
+    void showAllEvents() throws IOException;
 
     //zwroc pojedyczny el.  <--Kuba
-    void showSingleEvent(Integer eventId);
+    void showSingleEvent(Integer eventId) throws IOException;
 
     //wyszukiwanie String
     List<Event> searchByString(String name);

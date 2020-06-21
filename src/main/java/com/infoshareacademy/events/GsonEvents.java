@@ -12,8 +12,6 @@ public class GsonEvents {
 
     Event[] eventArray;
 
-
-
     public Event[] getJsonEventData(String filePath) {
 
         Gson gson = new Gson();
@@ -26,10 +24,5 @@ public class GsonEvents {
         Event[] gsonEvents = gson.fromJson(jsonReader, Event[].class);
         return gsonEvents;
     }
-
-
-
-
-
 
 }
