@@ -3,6 +3,7 @@ package com.infoshareacademy.events;
 import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.*;
 
 public class EventRepository implements EventRepositoryInterface {
@@ -175,10 +176,12 @@ public class EventRepository implements EventRepositoryInterface {
                     for (Attachment attachment : event.getAttachments()) {
                         attachment.getFileName();
                     }
-                } logger.info(event.toString());
+                }
+                logger.info(event.toString());
             }
 
-        } return false;
+        }
+        return false;
     }
 
     @Override
@@ -188,26 +191,27 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public void showAllEvents() {
+        clearScreen();
         String isActive;
-        for(Event event:eventSet) {
+        for (Event event : eventSet) {
             if (event.getActive().equals(1)) {
                 isActive = "Active";
-            }
-            else{
+            } else {
                 isActive = "Inactive";
             }
             logger.info("Event ID: " + event.getId() + "\n");
             logger.info("This Event is: " + isActive + "\n");
-            logger.info("Description: "+event.getName() + "\n");
-            logger.info("Place: " + event.getPlace().getSubname()+"\n");
-            logger.info("Organiser: " + event.getOrganizer().getDesignation()+"\n");
+            logger.info("Description: " + event.getName() + "\n");
+            logger.info("Place: " + event.getPlace().getSubname() + "\n");
+            logger.info("Organiser: " + event.getOrganizer().getDesignation() + "\n");
             logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
             logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
 
-        }
-        }
+            Menu.menuAllEvents();
+            //break;
 
-
+        }
+    }
 
 
     @Override
@@ -216,59 +220,75 @@ public class EventRepository implements EventRepositoryInterface {
         boolean eventFound = false;
         String isActive;
         for (Event event : eventSet) {
-            if (event.getId().equals(eventId)){
+            if (event.getId().equals(eventId)) {
                 eventFound = true;
 
-                    if (event.getActive().equals(0)) isActive = "inactive.";
-                    else isActive = "active.";
-                    logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
-                    logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-                    logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
-                    logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
-                    logger.info(event.trimDescription(event.getDescLong()));
-                    if (event.getPlace().getSubname() != null)
-                        logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
-                    else
-                        logger.info("\n\nPlace: " + event.getPlace().getName());
-                    logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
-                    if (event.getTickets().getStartTicket() != null)
-                        logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
-                    if (event.getTickets().getEndTicket() != null)
-                        logger.info("\nGet tickets on " + event.getUrls().getTickets());
-                    logger.info("\n\nEvent URL: " + event.getUrls().getWww());
-                    if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
-                    for (Attachment attachment1 : event.getAttachments())
-                        logger.info("/n" + attachment1.getFileName());
+                if (event.getActive().equals(0)) isActive = "inactive.";
+                else isActive = "active.";
+                logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
+                logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+                logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+                logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
+                logger.info(event.trimDescription(event.getDescLong()));
+                if (event.getPlace().getSubname() != null)
+                    logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+                else
+                    logger.info("\n\nPlace: " + event.getPlace().getName());
+                logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
+                if (event.getTickets().getStartTicket() != null)
+                    logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+                if (event.getTickets().getEndTicket() != null)
+                    logger.info("\nGet tickets on " + event.getUrls().getTickets());
+                logger.info("\n\nEvent URL: " + event.getUrls().getWww());
+                if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
+                for (Attachment attachment1 : event.getAttachments())
+                    logger.info("/n" + attachment1.getFileName());
                 Menu.menuSingleEvent();
                 break;
             }
         }
-        if (!eventFound){
+        if (!eventFound) {
             logger.info("Event not found! Going back to list of all events in: \n");
             Integer i = 5;
-            while (i>0){
+            while (i > 0) {
                 logger.info(i.toString() + "... \n");
                 try {
                     i--;
                     Thread.sleep(1000L);    // 1000L = 1000ms = 1 second
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     logger.info(e.getMessage());
                     showAllEvents();
                 }
-                }
+            }
             showAllEvents();
         }
 
 
     }
 
+    public String getUserQuery() {
+        Scanner scanner = new Scanner(System.in);
+        String userInput;
+        while (true) {
+            logger.info("\nPlease provide at least 3 characters in your query:\n");
+            userInput = scanner.nextLine();
+            if (userInput.length() >= 3) {
+                return userInput;
+            } else {
+                logger.info("\nNot enough characters provided.");
+            }
+        }
+    }
+
     @Override
-    public List<Event> searchByString(String name) {
+    public List<Event> searchByString(String userInput) {
         List<Event> eventList = new ArrayList<>();
+        String eventSpecification;
         for (Event event : eventSet) {
-            String eventSpecification = event.printEventParams();
-            if (eventSpecification.contains(name)) {
+            eventSpecification = event.returnEventParams();
+            if (eventSpecification.toLowerCase()
+                    .contains
+                            (userInput.toLowerCase())) {
                 eventList.add(event);
             }
         }

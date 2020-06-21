@@ -50,33 +50,30 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event " + '\n'+
-                "Id : " + id + '\n' +
-                "Place : " + place + '\n' +
-                "End Date : " + endDate + '\n' +
-                "Name : " + name + '\n' +
-                "Urls : " + urls + '\n' +
-                "Attachments : " + Arrays.toString(attachments)+ '\n' +
-                "Category Id : " + categoryId + '\n' +
-                "Start Date : " + startDate + '\n' +
-                "Organizer : " + organizer + '\n' +
-                "Active : " + active + '\n' +
-                "Tickets : " + tickets + '\n' ;
+        return "Event{" +
+                "id=" + id +
+                ", place=" + place +
+                ", endDate='" + endDate + '\'' +
+                ", name='" + name + '\'' +
+                ", urls=" + urls +
+                ", attachments=" + Arrays.toString(attachments) +
+                ", categoryId='" + categoryId + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", organizer=" + organizer +
+                ", active=" + active +
+                ", tickets=" + tickets +
+                '}';
     }
 
-    public String printEventParams() {
+    public String returnEventParams() {
         return
-                ""  + id + '\n'
-                        + '\n' + getPlace() + '\n'
+                ""  + '\n' + place.getName() + place.getSubname() + '\n'
                         + endDate + '\n'
                         + name + '\n'
-                        + urls + '\n'
-                        + Arrays.toString(attachments) + '\n'
-                        + categoryId + '\n'
+                        + urls.getWww() + urls.getTickets() + '\n'
                         + startDate + '\n'
-                        + organizer + '\n'
-                        + active + '\n'
-                        + tickets + '\n';
+                        + descLong + '\n'
+                        + organizer.getDesignation() + '\n';
     }
 
     public Integer getId() {
