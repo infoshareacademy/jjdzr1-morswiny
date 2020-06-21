@@ -16,9 +16,21 @@ public class EventRepository implements EventRepositoryInterface {
         Set<Event> eventSet1 = new HashSet<>(Arrays.asList(event));
         this.eventSet = eventSet1;
     }
+
+    public boolean eventExist(Event event){
+        if (Objects.nonNull(event)){
+            for (Event e : eventSet){
+                if (event.equals(e)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean createEvent(Event event) {
-        if (eventSet.add(event)){
+        if (!eventExist(event)){
             eventSet.add(event);
             logger.info("New event has been created successfully! \n" + event);
             return true;
