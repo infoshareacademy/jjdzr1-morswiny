@@ -17,15 +17,8 @@ public class EventRepository implements EventRepositoryInterface {
         this.eventSet = eventSet1;
     }
 
-    public boolean eventExist(Event event){
-        if (Objects.nonNull(event)){
-            for (Event e : eventSet){
-                if (event.equals(e)){
-                    return true;
-                }
-            }
-        }
-        return false;
+    private boolean eventExist(Event event) {
+        return Objects.nonNull(event) && eventSet.contains(event);
     }
 
     @Override
@@ -35,7 +28,7 @@ public class EventRepository implements EventRepositoryInterface {
             logger.info("New event has been created successfully! \n" + event);
             return true;
         } else {
-            logger.info("Event already existing!");
+            logger.info("Event already existing or not defined!");
             return false;
         }
     }
