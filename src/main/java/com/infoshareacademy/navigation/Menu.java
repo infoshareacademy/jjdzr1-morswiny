@@ -122,23 +122,4 @@ public class Menu {
         }
     }
 
-    public static void menuAllEvents(Integer eventId) throws IOException {
-
-        STDOUT.info("\nPress 1 to view event and all details\n");
-        STDOUT.info("Press 2 to go back to main menu\n");
-
-        Scanner scanner = new Scanner(System.in);
-        Integer choice = scanner.nextInt();
-        while (true) {
-            if (choice == 1) {
-                STDOUT.info("Please input ID of event you want to show\n");
-                Integer inputId = scanner.nextInt();
-                repository.showSingleEvent(inputId);
-            } else if (choice == 2) {
-                repository.showAllEvents();
-            }
-        }
-
-
-    }
 }

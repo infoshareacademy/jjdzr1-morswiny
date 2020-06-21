@@ -208,9 +208,6 @@ public class EventRepository implements EventRepositoryInterface {
             logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
             logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
 
-
-            //break;
-
         }
         Menu.menuAllEvents();
     }
