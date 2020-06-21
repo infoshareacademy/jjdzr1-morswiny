@@ -29,6 +29,27 @@ public class Menu {
 
     }
 
+    public static void menuAllEvents(){
+        EventRepository eventRepository = new EventRepository();
+        STDOUT.info("\n\nPress 1 to go to detailed information about the event\n");
+        STDOUT.info("Press 2 to go back to Main Menu\n");
+
+        Scanner scanner = new Scanner(System.in);
+        Integer choice = scanner.nextInt();
+
+        while(true){
+            if(choice==1){
+
+            }else if(choice==2){
+                start();
+            }
+
+        }
+
+    }
+
+
+
     public static void menuSingleEvent() {
 
         EventRepository repository = new EventRepository();
@@ -53,4 +74,6 @@ public class Menu {
                     start();
             }
         }
+
+
     }

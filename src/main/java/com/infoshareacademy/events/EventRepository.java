@@ -18,20 +18,20 @@ public class EventRepository implements EventRepositoryInterface {
         this.eventSet = eventSet1;
     }
 
+
     @Override
     public boolean createEvent(Event event) {
         if (event != null) {
-            try {
-                eventSet.add(event);
-                //logger.info("New event has been created successfully! \n" + eventSet.toString());
-                return true;
-            } catch (Exception e) {
-                logger.info("Event already existing!");
-                return false;
-            }
+            eventSet.add(event);
+            logger.info("New event has been created successfully! \n" + eventSet.toString());
+            return true;
         }
-        logger.info("Failed! Please try again");
-        return false;
+        else{
+            logger.info("Event already existing! \n");
+            logger.info("Failed! Please try again");
+            return false;
+        }
+
     }
 
     @Override
@@ -192,6 +192,7 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public void showAllEvents() {
+        clearScreen();
         String isActive;
         for (Event event : eventSet) {
             if (event.getActive().equals(1)) {
