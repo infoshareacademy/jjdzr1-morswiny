@@ -40,8 +40,8 @@ public class Menu {
 
         while(true){
             if(choice==1){
-                STDOUT.info("show single event\n");
-                STDOUT.info("Please insert eventId to receive some more additional information: ");
+                STDOUT.info("show single event\n"); //wstepnie
+                STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
                 Integer choiceSingleEvent = scanner.nextInt();
                 eventRepository.showSingleEvent(choiceSingleEvent);
 
