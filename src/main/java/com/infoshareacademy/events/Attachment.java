@@ -3,6 +3,16 @@ package com.infoshareacademy.events;
 public class Attachment {
     private String fileName;
 
+    public Attachment(String fileName) {
+        this.fileName = fileName;
+    }
+
+    @Override
+    public String toString() {
+        return "Attachment " +
+                "file Name = " + fileName;
+    }
+
     public String getFileName() {
         return fileName;
     }

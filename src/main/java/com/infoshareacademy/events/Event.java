@@ -1,12 +1,12 @@
 package com.infoshareacademy.events;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Properties;
+import java.util.Date;
+import java.util.Objects;
 
 public class Event {
     private Integer id;
@@ -23,21 +23,59 @@ public class Event {
     private Ticket tickets;
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(id, event.id) &&
+                Objects.equals(place, event.place) &&
+                Objects.equals(endDate, event.endDate) &&
+                Objects.equals(name, event.name) &&
+                Objects.equals(urls, event.urls) &&
+                Arrays.equals(attachments, event.attachments) &&
+                Objects.equals(descLong, event.descLong) &&
+                Objects.equals(categoryId, event.categoryId) &&
+                Objects.equals(startDate, event.startDate) &&
+                Objects.equals(organizer, event.organizer) &&
+                Objects.equals(active, event.active) &&
+                Objects.equals(tickets, event.tickets);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, place, endDate, name, urls, descLong, categoryId, startDate, organizer, active, tickets);
+        result = 31 * result + Arrays.hashCode(attachments);
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return "Event{" + '\n'+
-                "id='" + id + '\n' +
-                "place=" + place +
-                "endDate='" + endDate + '\n' +
-                "name='" + name + '\n' +
-                "urls=" + urls +
-                "attachments=" + Arrays.toString(attachments) + '\n' +
-                "categoryId='" + categoryId + '\n' +
-                "startDate='" + startDate + '\n' +
-                "organizer=" + organizer + '\n' +
-                "active=" + active + '\n' +
-                "tickets=" + tickets + '\n' +
+        return "Event{" +
+                "id=" + id +
+                ", place=" + place +
+                ", endDate='" + endDate + '\'' +
+                ", name='" + name + '\'' +
+                ", urls=" + urls +
+                ", attachments=" + Arrays.toString(attachments) +
+                ", categoryId='" + categoryId + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", organizer=" + organizer +
+                ", active=" + active +
+                ", tickets=" + tickets +
                 '}';
     }
+
+    public String returnEventParams() {
+        return
+                ""  + '\n' + place.getName() + place.getSubname() + '\n'
+                        + endDate + '\n'
+                        + name + '\n'
+                        + urls.getWww() + urls.getTickets() + '\n'
+                        + startDate + '\n'
+                        + descLong + '\n'
+                        + organizer.getDesignation() + '\n';
+    }
+
     public Integer getId() {
         return id;
     }

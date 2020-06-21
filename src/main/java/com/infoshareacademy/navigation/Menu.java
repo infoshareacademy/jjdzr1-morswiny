@@ -46,6 +46,36 @@ public class Menu {
 
     }
 
+    public static void menuAllEvents(){
+
+        EventRepository eventRepository = new EventRepository();
+        STDOUT.info("\n\nPress 1 to go to detailed information about Event\n");
+        STDOUT.info("Press 2 to go back to Main Menu\n");
+
+        Scanner scanner = new Scanner(System.in);
+        Integer choice = scanner.nextInt();
+
+        while(true){
+            if(choice==1){
+                STDOUT.info("show single event\n"); //wstepnie
+                STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
+                Integer choiceSingleEvent = scanner.nextInt();
+                eventRepository.showSingleEvent(choiceSingleEvent);
+
+            }else if(choice==2){
+                start();
+            }
+
+        }
+
+    }
+
+
+
+    public static void menuSingleEvent() {
+
+        EventRepository repository = new EventRepository();
+        STDOUT.info("\n\nPress 1 to add this event to FAVOURITES\n");
     public static void menuSingleEvent(Event eventSent) throws IOException {
         if (!Favourites.getFavourites().contains(eventSent))
             STDOUT.info("\n\nThis event is not on your favourites list. Press 1 to add this event to FAVOURITES\n");
@@ -114,5 +144,7 @@ public class Menu {
                 repository.showAllEvents();
             }
         }
+
+
     }
 }
