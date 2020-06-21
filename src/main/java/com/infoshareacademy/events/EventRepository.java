@@ -305,7 +305,7 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public List<Event> searchByPlace(String place) {
-        List<Event> list = new ArrayList();
+        List<Event> list = new ArrayList<>();
         for (Event event : eventSet) {
             String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
             if (nameAndSubname.toLowerCase()
@@ -320,7 +320,7 @@ public class EventRepository implements EventRepositoryInterface {
     @Override
     // 1 if active, 0 if inactive
     public List<Event> searchActive(Integer active) {
-        List<Event> list = new ArrayList();
+        List<Event> list = new ArrayList<>();
         for (Event event : eventSet) {
             if (event.getActive().equals(active)) {
                 list.add(event);
