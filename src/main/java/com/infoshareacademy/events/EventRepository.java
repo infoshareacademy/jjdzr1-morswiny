@@ -367,7 +367,11 @@ public class EventRepository implements EventRepositoryInterface {
         }
     }
 
-    public 
+    public String getInputForOrganizer() {
+        logger.info("\nProvide name of organizer to see all events hosted by them: \n");
+        String userInput = getUserQuery();
+        return userInput;
+    }
 
     public Set<Event> getEventSet() {
         return eventSet;
