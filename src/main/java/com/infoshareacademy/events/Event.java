@@ -1,12 +1,13 @@
 package com.infoshareacademy.events;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
 public class Event {
     private Integer id;
@@ -21,6 +22,8 @@ public class Event {
     private Organizer organizer;
     private Integer  active;
     private Ticket tickets;
+
+    private static final Logger logger = LoggerFactory.getLogger("CONSOLE_OUT");
 
     @Override
     public boolean equals(Object o) {
@@ -173,16 +176,15 @@ public class Event {
     }
 
     public String dateTimeFormatter(String date) {
-        Properties prop = readPropertiesFile("/src/main/resources/config.properties");
+        Properties prop = readPropertiesFile();
         String[] dateArray = date.split("T");
         LocalDate eventDate = LocalDate.parse(dateArray[0]);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
         String eventDate1 = eventDate.format(dtf);
-        String eventDateTime = eventDate1 + ", time: " + dateArray[1].substring(0,5);
-        return eventDateTime;
+        return eventDate1 + ", time: " + dateArray[1].substring(0,5);
     }
 
-    public static Properties readPropertiesFile(String fileName) {
+    public static Properties readPropertiesFile() {
         FileInputStream property = null;
         Properties prop = null;
         try {
@@ -190,34 +192,22 @@ public class Event {
             prop = new Properties();
             prop.load(property);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.info("Cannot find property file");
         } finally {
             assert property != null;
             try {
                 property.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.info("Cannot find property file");
             }
         }
         return prop;
     }
     public String trimDescription(String description){
-        String trimmedDesc = description.replace("\r", "");
-        trimmedDesc = trimmedDesc.replace("<p>", "");
-        trimmedDesc = trimmedDesc.replace("</p>", "");
-        trimmedDesc = trimmedDesc.replace("<p1>", "");
-        trimmedDesc = trimmedDesc.replace("</p1>", "");
-        trimmedDesc = trimmedDesc.replace("<h>", "");
-        trimmedDesc = trimmedDesc.replace("</h>", "");
-        trimmedDesc = trimmedDesc.replace("<h1>", "");
-        trimmedDesc = trimmedDesc.replace("</h1>", "");
-        trimmedDesc = trimmedDesc.replace("<h2>", "");
-        trimmedDesc = trimmedDesc.replace("</h2>", "");
-        trimmedDesc = trimmedDesc.replace("<b>", "");
-        trimmedDesc = trimmedDesc.replace("</b>", "");
-        trimmedDesc = trimmedDesc.replace("<br>", " ");
-        trimmedDesc = trimmedDesc.replace("</br>", "");
-        trimmedDesc = trimmedDesc.trim();
-        return trimmedDesc;
+
+        String htmlString = description;
+        String noHTMLString = htmlString.replaceAll("\\<.*?>","");
+        noHTMLString = noHTMLString.trim();
+        return noHTMLString;
     }
 }
