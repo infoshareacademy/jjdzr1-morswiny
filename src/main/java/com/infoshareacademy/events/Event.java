@@ -205,29 +205,9 @@ public class Event {
     }
     public String trimDescription(String description){
 
-        List<String> strToDel = new ArrayList<>();
-        strToDel.add("<p>");
-        strToDel.add("</p>");
-        strToDel.add("<p1>");
-        strToDel.add("</p1>");
-        strToDel.add("<p2>");
-        strToDel.add("</p2>");
-        strToDel.add("<h1>");
-        strToDel.add("</h1>");
-        strToDel.add("<h2>");
-        strToDel.add("</h2>");
-        strToDel.add("<h3>");
-        strToDel.add("</h3>");
-        strToDel.add("<br>");
-        strToDel.add("</br>");
-        strToDel.add("<b>");
-        strToDel.add("</b>");
-
-        String trimmedDesc = description;
-        for (String pattern : strToDel) {
-            trimmedDesc = trimmedDesc.replace(pattern, "");
-        }
-        trimmedDesc = trimmedDesc.trim();
-        return trimmedDesc;
+        String htmlString = description;
+        String noHTMLString = htmlString.replaceAll("\\<.*?>","");
+        noHTMLString = noHTMLString.trim();
+        return noHTMLString;
     }
 }
