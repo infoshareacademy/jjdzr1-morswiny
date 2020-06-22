@@ -35,8 +35,6 @@ public interface EventRepositoryInterface {
     //wyszukiwanie String
     List<Event> searchByString(String name);
 
-    //wyszukiwanie int
-    List<Event> searchByInteger(Integer name);
 
     //wyszukiwanie po dacie
 
@@ -50,7 +48,7 @@ public interface EventRepositoryInterface {
     List<Event> searchActive (Integer active);
 
     //filtrowanie eventow po nazwie == sortowanie
-    List<Event> filterEvents();
+    List<Event> searchByName(String name);
 
 
 

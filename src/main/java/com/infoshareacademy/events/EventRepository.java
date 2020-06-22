@@ -261,19 +261,6 @@ public class EventRepository implements EventRepositoryInterface {
         }
     }
 
-    public String getUserQuery() {
-        Scanner scanner = new Scanner(System.in);
-        String userInput;
-        while (true) {
-            logger.info("\nPlease provide at least 3 characters in your query:\n");
-            userInput = scanner.nextLine();
-            if (userInput.length() >= 3) {
-                return userInput;
-            } else {
-                logger.info("\nNot enough characters provided.");
-            }
-        }
-    }
 
     @Override
     public List<Event> searchByString(String userInput) {
@@ -329,6 +316,43 @@ public class EventRepository implements EventRepositoryInterface {
         return list;
     }
 
+    @Override
+    public List<Event> searchByName (String name) {
+        List<Event> list = new ArrayList<>();
+        for (Event event : eventSet){
+            if (event.getName().equals(name)){
+                list.add(event);
+            }
+        }
+        return list;
+    }
+// method to get random String from user for random user's query (at least 3 characters)
+    public String getUserQuery() {
+        Scanner scanner = new Scanner(System.in);
+        String userInput;
+        while (true) {
+            logger.info("\nPlease provide at least 3 characters in your query:\n");
+            userInput = scanner.nextLine();
+            if (userInput.length() >= 3) {
+                return userInput;
+            } else {
+                logger.info("\nNot enough characters provided.");
+            }
+        }
+    }
+
+    public String getInputForName() {
+        logger.info("\nProvide name of the event you search for:\n");
+        String userInput = getUserQuery();
+        return userInput;
+    }
+
+    public String getInputForPlace(){
+        logger.info("\nProvide name of the place to search for events happening there:\n");
+        String userInput = getUserQuery();
+        return userInput;
+    }
+
     public Integer getInputForActive() {
         Scanner scanner = new Scanner(System.in);
         Integer userInput;
@@ -343,17 +367,7 @@ public class EventRepository implements EventRepositoryInterface {
         }
     }
 
-
-    @Override
-    public List<Event> searchByInteger(Integer name) {
-        return null;
-    }
-
-    @Override
-    public List<Event> filterEvents() {
-        return null;
-    }
-
+    public 
 
     public Set<Event> getEventSet() {
         return eventSet;
