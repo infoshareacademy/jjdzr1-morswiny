@@ -1,5 +1,6 @@
 package com.infoshareacademy.navigation;
 
+//TODO: ujednolicic nazewnictwo dla loggerea, albo logger albo STDOUT
 import com.infoshareacademy.events.Event;
 import com.infoshareacademy.events.EventRepository;
 import com.infoshareacademy.favourites.Favourites;
@@ -7,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Menu {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
@@ -36,15 +39,15 @@ public class Menu {
 
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
-            if (choice == 1)
-                repository.showAllEvents();
-            else if (choice == 2)
-                favourites.showFavs();
-            else if (choice == 3) {
-                System.exit(0);
-            } else {
-                start();
-            }
+        if (choice == 1)
+            repository.showAllEvents();
+        else if (choice == 2)
+            favourites.showFavs();
+        else if (choice == 3) {
+            System.exit(0);
+        } else {
+            start();
+        }
     }
 
     public static void menuAllEvents() throws IOException {
@@ -56,15 +59,15 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
 
-        while(true){
-            if(choice==1){
+        while (true) {
+            if (choice == 1) {
                 STDOUT.info("show single event\n"); //wstepnie
                 STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
                 Integer choiceSingleEvent = scanner.nextInt();
                 repository.showSingleEvent(choiceSingleEvent);
 
-            }else if(choice==2){
-               start();
+            } else if (choice == 2) {
+                start();
             }
 
         }
@@ -96,8 +99,7 @@ public class Menu {
             else if (choice == 5) {
                 favourites.deleteFromFavs(eventSent);
                 menuSingleEvent(eventSent);
-            }
-            else {
+            } else {
                 STDOUT.info("Please enter valid number: ");
                 choice = scanner.nextInt();
             }
@@ -130,5 +132,60 @@ public class Menu {
             }
         }
 
+    }
+
+    public static void menuSearchEvents(EventRepository eventRepo) {
+        STDOUT.info("\nPress 1 if you want to search events by event name.");
+        STDOUT.info("\nPress 2 if you want to search events by event organizer.");
+        STDOUT.info("\nPress 3 if you want to search events by event place.");
+        STDOUT.info("\nPress 4 if you want to search events by event status whether it is active or not.");
+        STDOUT.info("\nPress 5 if you want to search events by any event characteristic.\n");
+        Menu menu = new Menu();
+        Integer userInput = menu.getUserInput();
+
+        switch (userInput) {
+            case 1:
+                String name = eventRepo.getInputForName();
+                //TODO: zrob dobre wyswietlanie rezultatu
+                eventRepo.searchByName(name);
+                break;
+            case 2:
+                String organizer = eventRepo.getInputForOrganizer();
+                eventRepo.searchByOrganizer(organizer);
+                break;
+            case 3:
+                String place = eventRepo.getInputForPlace();
+                eventRepo.searchByPlace(place);
+                break;
+            case 4:
+                Integer active = eventRepo.getInputForActive();
+                eventRepo.searchActive(active);
+                break;
+            case 5:
+                String randomText = eventRepo.getRandomInput();
+                eventRepo.searchByString(randomText);
+                break;
+        }
+    }
+
+    public Integer getUserInput() {
+
+        Set<Integer> legitimateValues = new HashSet<>();
+        legitimateValues.add(1);
+        legitimateValues.add(2);
+        legitimateValues.add(3);
+        legitimateValues.add(4);
+        legitimateValues.add(5);
+
+        Scanner scanner = new Scanner(System.in);
+        Integer userInput;
+        while (true) {
+            userInput = scanner.nextInt();
+            if (legitimateValues.contains(userInput)) {
+                return userInput;
+            } else {
+                STDOUT.info("\nPlease try again and provide a correct parameter:\n");
+            }
+        }
     }
 }
