@@ -242,26 +242,36 @@ public class EventRepository implements EventRepositoryInterface {
 
     public void singleEventData(Event event) {
         String isActive;
-        if (event.getActive().equals(0)) isActive = "inactive.";
-        else isActive = "active.";
+            if (event.getActive().equals(0)){
+                 isActive = "inactive.";
+            } else isActive = "active.";
+
+        logger.info("---------------*---------------");
         logger.info("\nEvent ID: " + event.getId() + ". This event is " + isActive + "\n");
         logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
         logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
         logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
         logger.info(event.trimDescription(event.getDescLong()));
-        if (event.getPlace().getSubname() != null)
-            logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
-        else
-            logger.info("\n\nPlace: " + event.getPlace().getName());
+
+            if (event.getPlace().getSubname() != null) {
+                logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+            } else {
+                logger.info("\n\nPlace: " + event.getPlace().getName());
+            }
         logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
-        if (event.getTickets().getStartTicket() != null)
-            logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
-        if (event.getTickets().getEndTicket() != null)
-            logger.info("\nGet tickets on " + event.getUrls().getTickets());
+            if (event.getTickets().getStartTicket() != null) {
+                logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+            }
+            if (event.getTickets().getEndTicket() != null) {
+                logger.info("\nGet tickets on " + event.getUrls().getTickets());
+            }
         logger.info("\n\nEvent URL: " + event.getUrls().getWww());
-        if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
-        for (Attachment attachment1 : event.getAttachments())
-            logger.info("/n" + attachment1.getFileName());
+            if (event.getAttachments().length != 0) {
+                logger.info("\nAttachments: ");
+                for (Attachment attachment1 : event.getAttachments())
+                    logger.info("\n" + attachment1.getFileName());
+        }
+        logger.info("\n---------------*---------------");
     }
 
     public String getUserQuery() {
