@@ -3,6 +3,7 @@ package com.infoshareacademy.events;
 import com.infoshareacademy.navigation.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -24,7 +25,7 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public boolean createEvent(Event event) {
-        if (!eventExist(event)){
+        if (!eventExist(event)) {
             eventSet.add(event);
             logger.info("New event has been created successfully! \n" + event);
             return true;
@@ -37,7 +38,7 @@ public class EventRepository implements EventRepositoryInterface {
     @Override
     public boolean deleteEvent(Integer eventId) {
         for (Event event : eventSet) {
-            if (eventId.equals(event.getId())){
+            if (eventId.equals(event.getId())) {
                 eventSet.remove(event);
                 logger.info("Event has been deleted");
                 return true;
@@ -46,7 +47,6 @@ public class EventRepository implements EventRepositoryInterface {
         logger.info("\nFailed! Please try again");
         return false;
     }
-
 
 
     @Override
@@ -220,26 +220,26 @@ public class EventRepository implements EventRepositoryInterface {
             if (event.getId().equals(eventId)) {
                 eventFound = true;
 
-                    if (event.getActive().equals(0)) isActive = "inactive.";
-                    else isActive = "active.";
-                    logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
-                    logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-                    logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
-                    logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
-                    logger.info(event.trimDescription(event.getDescLong()));
-                    if (event.getPlace().getSubname() != null)
-                        logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
-                    else
-                        logger.info("\n\nPlace: " + event.getPlace().getName());
-                    logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
-                    if (event.getTickets().getStartTicket() != null)
-                        logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
-                    if (event.getTickets().getEndTicket() != null)
-                        logger.info("\nGet tickets on " + event.getUrls().getTickets());
-                    logger.info("\n\nEvent URL: " + event.getUrls().getWww());
-                    if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
-                    for (Attachment attachment1 : event.getAttachments())
-                        logger.info("/n" + attachment1.getFileName());
+                if (event.getActive().equals(0)) isActive = "inactive.";
+                else isActive = "active.";
+                logger.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
+                logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+                logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+                logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
+                logger.info(event.trimDescription(event.getDescLong()));
+                if (event.getPlace().getSubname() != null)
+                    logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+                else
+                    logger.info("\n\nPlace: " + event.getPlace().getName());
+                logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
+                if (event.getTickets().getStartTicket() != null)
+                    logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+                if (event.getTickets().getEndTicket() != null)
+                    logger.info("\nGet tickets on " + event.getUrls().getTickets());
+                logger.info("\n\nEvent URL: " + event.getUrls().getWww());
+                if (event.getAttachments().length != 0) logger.info("\nAttachments: ");
+                for (Attachment attachment1 : event.getAttachments())
+                    logger.info("/n" + attachment1.getFileName());
                 Menu.menuSingleEvent(event);
                 break;
             }
@@ -317,21 +317,24 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     @Override
-    public List<Event> searchByName (String name) {
+    public List<Event> searchByName(String name) {
         List<Event> list = new ArrayList<>();
-        for (Event event : eventSet){
-            if (event.getName().equals(name)){
+        for (Event event : eventSet) {
+            if (event.getName().toLowerCase()
+                    .contains(
+                            name.toLowerCase())) {
                 list.add(event);
             }
         }
         return list;
     }
-// method to get random String from user for random user's query (at least 3 characters)
+
+    // method to get random String from user for random user's query (at least 3 characters)
     public String getUserQuery() {
         Scanner scanner = new Scanner(System.in);
         String userInput;
         while (true) {
-            logger.info("\nPlease provide at least 3 characters in your query:\n");
+            logger.info(" Please provide at least 3 characters in your query:\n");
             userInput = scanner.nextLine();
             if (userInput.length() >= 3) {
                 return userInput;
@@ -342,13 +345,13 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     public String getInputForName() {
-        logger.info("\nProvide name of the event you search for:\n");
+        logger.info("\nProvide name of the event you search for.");
         String userInput = getUserQuery();
         return userInput;
     }
 
-    public String getInputForPlace(){
-        logger.info("\nProvide name of the place to search for events happening there:\n");
+    public String getInputForPlace() {
+        logger.info("\nProvide name of the place to search for events happening there.");
         String userInput = getUserQuery();
         return userInput;
     }
@@ -369,6 +372,12 @@ public class EventRepository implements EventRepositoryInterface {
 
     public String getInputForOrganizer() {
         logger.info("\nProvide name of organizer to see all events hosted by them: \n");
+        String userInput = getUserQuery();
+        return userInput;
+    }
+
+    public String getRandomInput() {
+        logger.info("\nProvide your random query.");
         String userInput = getUserQuery();
         return userInput;
     }
