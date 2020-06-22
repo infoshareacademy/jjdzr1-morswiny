@@ -32,7 +32,9 @@ public class Menu {
         STDOUT.info("Welcome to our programme!\n");
         STDOUT.info("Press 1 to view all events\n");
         STDOUT.info("Press 2 to view favourites\n");
-        STDOUT.info("Press 3 to exit\n");
+        STDOUT.info("Press 3 to exit\n\n");
+        STDOUT.info("Please insert your choice:  ");
+
 
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
@@ -50,15 +52,14 @@ public class Menu {
     public static void menuAllEvents() throws IOException {
 
         EventRepository eventRepository = new EventRepository();
-        STDOUT.info("\n\nPress 1 to go to detailed information about Event\n");
-        STDOUT.info("Press 2 to go back to Main Menu\n");
-
+        STDOUT.info("\nPress 1 to go to detailed information for selected event\n");
+        STDOUT.info("Press 2 to go back to main menu\n\n");
+        STDOUT.info("Please insert your choice:  ");
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
 
         while(true){
             if(choice==1){
-                STDOUT.info("show single event\n"); //wstepnie
                 STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
                 Integer choiceSingleEvent = scanner.nextInt();
                 repository.showSingleEvent(choiceSingleEvent);
