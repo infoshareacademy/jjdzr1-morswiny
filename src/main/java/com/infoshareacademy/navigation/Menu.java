@@ -1,6 +1,7 @@
 package com.infoshareacademy.navigation;
 
 //TODO: ujednolicic nazewnictwo dla loggerea, albo logger albo STDOUT
+
 import com.infoshareacademy.events.Event;
 import com.infoshareacademy.events.EventRepository;
 import com.infoshareacademy.favourites.Favourites;
@@ -52,7 +53,6 @@ public class Menu {
 
     public static void menuAllEvents() throws IOException {
 
-        EventRepository eventRepository = new EventRepository();
         STDOUT.info("\n\nPress 1 to go to detailed information about Event\n");
         STDOUT.info("Press 2 to go back to Main Menu\n");
 
@@ -65,7 +65,6 @@ public class Menu {
                 STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
                 Integer choiceSingleEvent = scanner.nextInt();
                 repository.showSingleEvent(choiceSingleEvent);
-
             } else if (choice == 2) {
                 start();
             }
@@ -147,7 +146,7 @@ public class Menu {
             case 1:
                 String name = eventRepo.getInputForName();
                 //TODO: zrob dobre wyswietlanie rezultatu
-                System.out.println(eventRepo.searchByName(name));
+                eventRepo.searchByName(name);
                 break;
             case 2:
                 String organizer = eventRepo.getInputForOrganizer();
