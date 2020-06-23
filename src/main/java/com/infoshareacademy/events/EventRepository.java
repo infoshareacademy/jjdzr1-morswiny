@@ -276,26 +276,26 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public List<Event> searchByString(String userInput) {
-        List<Event> eventList = new ArrayList<>();
+        List<Event> list = new ArrayList<>();
         String eventSpecification;
         for (Event event : eventSet) {
             eventSpecification = event.returnEventParams();
             if (eventSpecification.toLowerCase()
                     .contains
                             (userInput.toLowerCase())) {
-                eventList.add(event);
+                list.add(event);
             }
         }
-        return eventList;
+        return list;
     }
 
     @Override
     public List<Event> searchByOrganizer(String organizer) {
         List<Event> list = new ArrayList<>();
         for (Event event : eventSet) {
-            if (organizer.toLowerCase()
+            if (event.getOrganizer().getDesignation().toLowerCase()
                     .contains
-                            (event.getOrganizer().getDesignation().toLowerCase())) {
+                            (organizer.toLowerCase())) {
                 list.add(event);
             }
         }

@@ -147,7 +147,7 @@ public class Menu {
             case 1:
                 String name = eventRepo.getInputForName();
                 //TODO: zrob dobre wyswietlanie rezultatu
-                eventRepo.searchByName(name);
+                System.out.println(eventRepo.searchByName(name));
                 break;
             case 2:
                 String organizer = eventRepo.getInputForOrganizer();
