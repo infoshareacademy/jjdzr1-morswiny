@@ -1,7 +1,5 @@
 package com.infoshareacademy.navigation;
 
-//TODO: ujednolicic nazewnictwo dla loggerea, albo logger albo STDOUT
-
 import com.infoshareacademy.events.Event;
 import com.infoshareacademy.events.EventRepository;
 import com.infoshareacademy.favourites.Favourites;
@@ -36,37 +34,40 @@ public class Menu {
         STDOUT.info("Welcome to our programme!\n");
         STDOUT.info("Press 1 to view all events\n");
         STDOUT.info("Press 2 to view favourites\n");
-        STDOUT.info("Press 3 to exit\n");
+        STDOUT.info("Press 3 to exit\n\n");
+        STDOUT.info("Please insert your choice:  ");
+
 
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
-        if (choice == 1)
-            repository.showAllEvents();
-        else if (choice == 2)
-            favourites.showFavs();
-        else if (choice == 3) {
-            System.exit(0);
-        } else {
-            start();
-        }
+            if (choice == 1)
+                repository.showAllEvents();
+            else if (choice == 2)
+                favourites.showFavs();
+            else if (choice == 3) {
+                System.exit(0);
+            } else {
+                start();
+            }
     }
 
     public static void menuAllEvents() throws IOException {
 
-        STDOUT.info("\n\nPress 1 to go to detailed information about Event\n");
-        STDOUT.info("Press 2 to go back to Main Menu\n");
-
+        EventRepository eventRepository = new EventRepository();
+        STDOUT.info("\nPress 1 to go to detailed information for selected event\n");
+        STDOUT.info("Press 2 to go back to main menu\n\n");
+        STDOUT.info("Please insert your choice:  ");
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
 
-        while (true) {
-            if (choice == 1) {
-                STDOUT.info("show single event\n"); //wstepnie
+        while(true){
+            if(choice==1){
                 STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
                 Integer choiceSingleEvent = scanner.nextInt();
                 repository.showSingleEvent(choiceSingleEvent);
-            } else if (choice == 2) {
-                start();
+
+            }else if(choice==2){
+               start();
             }
 
         }
@@ -80,7 +81,9 @@ public class Menu {
             STDOUT.info("\n\n*This event is on your favourites list.* \nPress 5 to remove it from your favourites\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go back to the list of all events\n");
-        STDOUT.info("Press 4 to go back to main menu\n");
+        STDOUT.info("Press 4 to go back to main menu\n\n");
+        STDOUT.info("Please insert your choice:  ");
+
 
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
@@ -98,7 +101,8 @@ public class Menu {
             else if (choice == 5) {
                 favourites.deleteFromFavs(eventSent);
                 menuSingleEvent(eventSent);
-            } else {
+            }
+            else {
                 STDOUT.info("Please enter valid number: ");
                 choice = scanner.nextInt();
             }
@@ -110,7 +114,9 @@ public class Menu {
         STDOUT.info("\n\nPress 1 to remove this event from Favourites\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go to the list of favourite events\n");
-        STDOUT.info("Press 4 to go back to main menu\n");
+        STDOUT.info("Press 4 to go back to main menu\n\n");
+        STDOUT.info("Please insert your choice:  ");
+
 
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();

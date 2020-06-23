@@ -205,7 +205,11 @@ public class EventRepository implements EventRepositoryInterface {
             logger.info("Event ID: " + event.getId() + "\n");
             logger.info("This Event is: " + isActive + "\n");
             logger.info("Description: " + event.getName() + "\n");
-            logger.info("Place: " + event.getPlace().getSubname() + "\n");
+            if (event.getPlace().getSubname() != null) {
+                logger.info("Place: " + event.getPlace().getSubname()+"\n");
+            } else {
+                logger.info("Place: " + event.getPlace().getName()+"\n");
+            }
             logger.info("Organiser: " + event.getOrganizer().getDesignation() + "\n");
             logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
             logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
