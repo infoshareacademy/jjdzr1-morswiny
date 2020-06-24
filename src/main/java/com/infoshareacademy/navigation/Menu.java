@@ -48,7 +48,7 @@ public class Menu {
         else if (choice == 3) {
             Menu menu = new Menu();
             menuSearchEvents(repository);
-        } else if (choice == 3) {
+        } else if (choice == 4) {
             System.exit(0);
         } else {
             start();
