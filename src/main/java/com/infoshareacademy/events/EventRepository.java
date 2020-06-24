@@ -1,7 +1,7 @@
 package com.infoshareacademy.events;
 
 import com.infoshareacademy.navigation.Menu;
-import jdk.vm.ci.meta.Local;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class EventRepository implements EventRepositoryInterface {
 
-    private static final Logger logger = LoggerFactory.getLogger("CONSOLE_OUT");
+    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private Set<Event> eventSet;
 
     public void arrayToSet() {
@@ -30,10 +30,10 @@ public class EventRepository implements EventRepositoryInterface {
     public boolean createEvent(Event event) {
         if (!eventExist(event)) {
             eventSet.add(event);
-            logger.info("New event has been created successfully! \n" + event);
+            STDOUT.info("New event has been created successfully! \n" + event);
             return true;
         } else {
-            logger.info("Event already existing or not defined!");
+            STDOUT.info("Event already existing or not defined!");
             return false;
         }
     }
@@ -43,11 +43,11 @@ public class EventRepository implements EventRepositoryInterface {
         for (Event event : eventSet) {
             if (eventId.equals(event.getId())) {
                 eventSet.remove(event);
-                logger.info("Event has been deleted");
+                STDOUT.info("Event has been deleted");
                 return true;
             }
         }
-        logger.info("\nFailed! Please try again");
+        STDOUT.info("\nFailed! Please try again");
         return false;
     }
 
@@ -56,7 +56,7 @@ public class EventRepository implements EventRepositoryInterface {
     public boolean updateEventById(Integer eventId) {
         for (Event event : eventSet) {
             if ((event.getId().equals(eventId))) {
-                logger.info("Please enter new name. To go next hit Enter ");
+                STDOUT.info("Please enter new name. To go next hit Enter ");
                 Scanner scanName = new Scanner(System.in);
                 String name = scanName.nextLine();
                 if (!name.equals("")) {
@@ -64,7 +64,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getName();
                 }
-                logger.info("Please enter new place name. To go next hit Enter ");
+                STDOUT.info("Please enter new place name. To go next hit Enter ");
                 Scanner scanPlace = new Scanner(System.in);
                 String placeName = scanPlace.nextLine();
                 if (!placeName.equals("")) {
@@ -73,7 +73,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getPlace().getName();
                 }
-                logger.info("Please enter new  place subname. To go next hit Enter ");
+                STDOUT.info("Please enter new  place subname. To go next hit Enter ");
                 Scanner scanSubname = new Scanner(System.in);
                 String subname = scanSubname.nextLine();
                 if (!subname.equals("")) {
@@ -82,7 +82,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getPlace().getSubname();
                 }
-                logger.info("Please enter new start date. To go next hit Enter ");
+                STDOUT.info("Please enter new start date. To go next hit Enter ");
                 Scanner scanStartDate = new Scanner(System.in);
                 String startDate = scanStartDate.nextLine();
                 if (!startDate.equals("")) {
@@ -90,7 +90,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.dateTimeFormatter(event.getStartDate());
                 }
-                logger.info("Please enter new end date. To go next hit Enter ");
+                STDOUT.info("Please enter new end date. To go next hit Enter ");
                 Scanner scanEndDate = new Scanner(System.in);
                 String endDate = scanEndDate.nextLine();
                 if (!endDate.equals("")) {
@@ -98,7 +98,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.dateTimeFormatter(event.getEndDate());
                 }
-                logger.info("Please enter new organizer designation. To go next hit Enter ");
+                STDOUT.info("Please enter new organizer designation. To go next hit Enter ");
                 Scanner scanOrganizer = new Scanner(System.in);
                 String organizer = scanOrganizer.nextLine();
                 if (!organizer.equals("")) {
@@ -107,7 +107,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getOrganizer().getDesignation();
                 }
-                logger.info("Please enter new event URL. To go next hit Enter ");
+                STDOUT.info("Please enter new event URL. To go next hit Enter ");
                 Scanner scanUrlWww = new Scanner(System.in);
                 String urlW = scanUrlWww.nextLine();
                 if (!urlW.equals("")) {
@@ -116,7 +116,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getUrls().getWww();
                 }
-                logger.info("Please enter new event URL for tickets. To go next hit Enter ");
+                STDOUT.info("Please enter new event URL for tickets. To go next hit Enter ");
                 Scanner scanUrlTicket = new Scanner(System.in);
                 String urlT = scanUrlTicket.nextLine();
                 if (!urlT.equals("")) {
@@ -125,7 +125,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getUrls().getTickets();
                 }
-                logger.info("Please enter new category ID. To go next hit Enter ");
+                STDOUT.info("Please enter new category ID. To go next hit Enter ");
                 Scanner scanCat = new Scanner(System.in);
                 String cat = scanCat.nextLine();
                 if (!cat.equals("")) {
@@ -133,7 +133,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getCategoryId();
                 }
-                logger.info("Please enter 'yes' if event is active. To go next hit Enter ");
+                STDOUT.info("Please enter 'yes' if event is active. To go next hit Enter ");
                 Scanner scanActive = new Scanner(System.in);
                 String active = scanActive.nextLine();
                 if (active.equals("yes")) {
@@ -141,7 +141,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.setActive(0);
                 }
-                logger.info("Please enter new ticket type. To go next hit Enter ");
+                STDOUT.info("Please enter new ticket type. To go next hit Enter ");
                 Scanner scanTicketType = new Scanner(System.in);
                 String ticketType = scanCat.nextLine();
                 if (!ticketType.equals("")) {
@@ -150,7 +150,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getTickets().getType();
                 }
-                logger.info("Please enter new start ticket. To go next hit Enter ");
+                STDOUT.info("Please enter new start ticket. To go next hit Enter ");
                 Scanner scanStartT = new Scanner(System.in);
                 String startTicket = scanCat.nextLine();
                 if (!startTicket.equals("")) {
@@ -159,7 +159,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getTickets().getStartTicket();
                 }
-                logger.info("Please enter new end ticket. To go next hit Enter ");
+                STDOUT.info("Please enter new end ticket. To go next hit Enter ");
                 Scanner scanEndT = new Scanner(System.in);
                 String endTicket = scanCat.nextLine();
                 if (!endTicket.equals("")) {
@@ -168,7 +168,7 @@ public class EventRepository implements EventRepositoryInterface {
                 } else {
                     event.getTickets().getEndTicket();
                 }
-                logger.info("Please enter new attachment. To go next hit Enter ");
+                STDOUT.info("Please enter new attachment. To go next hit Enter ");
                 Scanner scanAttachment = new Scanner(System.in);
                 String attach = scanAttachment.nextLine();
                 if (!attach.equals("")) {
@@ -180,7 +180,7 @@ public class EventRepository implements EventRepositoryInterface {
                         attachment.getFileName();
                     }
                 }
-                logger.info(event.toString());
+                STDOUT.info(event.toString());
             }
 
         }
@@ -202,17 +202,17 @@ public class EventRepository implements EventRepositoryInterface {
             } else {
                 isActive = "Inactive";
             }
-            logger.info("Event ID: " + event.getId() + "\n");
-            logger.info("This Event is: " + isActive + "\n");
-            logger.info("Description: " + event.getName() + "\n");
+            STDOUT.info("Event ID: " + event.getId() + "\n");
+            STDOUT.info("This Event is: " + isActive + "\n");
+            STDOUT.info("Description: " + event.getName() + "\n");
             if (event.getPlace().getSubname() != null) {
-                logger.info("Place: " + event.getPlace().getSubname()+"\n");
+                STDOUT.info("Place: " + event.getPlace().getSubname()+"\n");
             } else {
-                logger.info("Place: " + event.getPlace().getName()+"\n");
+                STDOUT.info("Place: " + event.getPlace().getName()+"\n");
             }
-            logger.info("Organiser: " + event.getOrganizer().getDesignation() + "\n");
-            logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-            logger.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+            STDOUT.info("Organiser: " + event.getOrganizer().getDesignation() + "\n");
+            STDOUT.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+            STDOUT.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
 
         }
         Menu.menuAllEvents();
@@ -231,7 +231,7 @@ public class EventRepository implements EventRepositoryInterface {
             }
         }
         if (!eventFound) {
-            logger.info("Event not found! Try again or press 1 to go back to main menu\n");
+            STDOUT.info("Event not found! Try again or press 1 to go back to main menu\n");
             Scanner scanner = new Scanner(System.in);
             int choice = 0;
             try {
@@ -242,7 +242,7 @@ public class EventRepository implements EventRepositoryInterface {
                     Menu.start();
                 }
             } catch (Exception e) {
-                logger.info("Please enter valid number");
+                STDOUT.info("Please enter valid number");
             }
         }
     }
@@ -253,32 +253,38 @@ public class EventRepository implements EventRepositoryInterface {
             isActive = "inactive.";
         } else isActive = "active.";
 
-        logger.info("\n---------------*---------------");
-        logger.info("\nEvent ID: " + event.getId() + ". This event is " + isActive + "\n");
-        logger.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-        logger.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
-        logger.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
-        logger.info(event.trimDescription(event.getDescLong()));
+        STDOUT.info("\n---------------*---------------");
+        STDOUT.info("\nEvent ID: " + event.getId() + ". This event is " + isActive + "\n");
+        STDOUT.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+        STDOUT.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+        STDOUT.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
+        STDOUT.info(event.trimDescription(event.getDescLong()));
 
         if (event.getPlace().getSubname() != null) {
-            logger.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+            STDOUT.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
         } else {
-            logger.info("\n\nPlace: " + event.getPlace().getName());
+            STDOUT.info("\n\nPlace: " + event.getPlace().getName());
         }
-        logger.info("\nOrganiser:" + event.getOrganizer().getDesignation());
+        STDOUT.info("\nOrganiser:" + event.getOrganizer().getDesignation());
         if (event.getTickets().getStartTicket() != null) {
-            logger.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+            STDOUT.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
         }
         if (event.getTickets().getEndTicket() != null) {
-            logger.info("\nGet tickets on " + event.getUrls().getTickets());
+            STDOUT.info("\nGet tickets on " + event.getUrls().getTickets());
         }
-        logger.info("\n\nEvent URL: " + event.getUrls().getWww());
+        STDOUT.info("\n\nEvent URL: " + event.getUrls().getWww());
         if (event.getAttachments().length != 0) {
-            logger.info("\nAttachments: ");
+            STDOUT.info("\nAttachments: ");
             for (Attachment attachment1 : event.getAttachments())
-                logger.info("\n" + attachment1.getFileName());
+                STDOUT.info("\n" + attachment1.getFileName());
         }
-        logger.info("\n---------------*---------------");
+        STDOUT.info("\n---------------*---------------");
+    }
+
+    public void showListOfEvents (List <Event> list){
+        for (Event event : list) {
+            singleEventData(event);
+        }
     }
 
 
@@ -398,24 +404,24 @@ public class EventRepository implements EventRepositoryInterface {
         Scanner scanner = new Scanner(System.in);
         String userInput;
         while (true) {
-            logger.info(" Please provide at least 3 characters in your query:\n");
+            STDOUT.info(" Please provide at least 3 characters in your query:\n");
             userInput = scanner.nextLine();
             if (userInput.length() >= 3) {
                 return userInput;
             } else {
-                logger.info("\nNot enough characters provided.");
+                STDOUT.info("\nNot enough characters provided.");
             }
         }
     }
 
 
     public String getInputForName() {
-        logger.info("\nProvide name of the event you search for.");
+        STDOUT.info("\nProvide name of the event you search for.");
         return getUserQuery();
     }
 
     public String getInputForPlace() {
-        logger.info("\nProvide name of the place to search for events happening there.");
+        STDOUT.info("\nProvide name of the place to search for events happening there.");
         return getUserQuery();
     }
 
@@ -423,24 +429,25 @@ public class EventRepository implements EventRepositoryInterface {
         Scanner scanner = new Scanner(System.in);
         Integer userInput;
         while (true) {
-            logger.info("\nSelect 1 if you want to search for active events, select 0 for inactive events.\n");
+            STDOUT.info("\nSelect 1 if you want to search for active events, select 0 for inactive events.\n\n");
+           STDOUT.info("Please insert your choice: ");
             userInput = scanner.nextInt();
             if (userInput.equals(1) || userInput.equals(0)) {
                 return userInput;
             } else {
-                logger.info("\nIncorrect value provided.");
+                STDOUT.info("\nIncorrect value provided.");
             }
         }
     }
 
     public String getInputForOrganizer() {
-        logger.info("\nProvide name of organizer to see all events hosted by them: \n");
+        STDOUT.info("\nProvide name of organizer to see all events hosted by them: \n");
         String userInput = getUserQuery();
         return userInput;
     }
 
     public String getRandomInput() {
-        logger.info("\nProvide your random query.");
+        STDOUT.info("\nProvide your random query.");
         String userInput = getUserQuery();
         return userInput;
     }

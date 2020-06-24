@@ -9,10 +9,7 @@ public class App
 {
     public static void main( String[] args ) throws IOException {
 
-        //Menu.programStart();
-        EventRepository eR = new EventRepository();
-        Menu menu = new Menu();
-        menu.menuSearchEvents(eR);
+        Menu.programStart();
         
     }
 }
