@@ -32,19 +32,29 @@ public class Menu {
         STDOUT.info("Welcome to our programme!\n");
         STDOUT.info("Press 1 to view all events\n");
         STDOUT.info("Press 2 to view favourites\n");
-        STDOUT.info("Press 3 to exit\n");
+        STDOUT.info("Press 3 to create new event\n");
+        STDOUT.info("Press 4 to exit\n");
 
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
-        if (choice == 1)
+        if (choice == 1) {
             repository.showAllEvents();
-        else if (choice == 2)
+        } else if (choice == 2) {
             favourites.showFavs();
-        else if (choice == 3)
+        } else if (choice == 3){
+            try {
+                repository.createEvent(getRepository().putEventData());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Menu.menuAllEvents();
+        } else if (choice == 4){
             System.exit(0);
-        scanner.close();
-
+        }
+         scanner.close();
     }
+
+
 
     public static void menuAllEvents() throws IOException {
 
@@ -56,7 +66,7 @@ public class Menu {
         Integer choice = scanner.nextInt();
 
         while(true){
-            if(choice==1){
+            if(choice==1) {
                 STDOUT.info("show single event\n"); //wstepnie
                 STDOUT.info("Please insert eventId to receive some more additional information about this particual event: ");
                 Integer choiceSingleEvent = scanner.nextInt();
@@ -78,6 +88,9 @@ public class Menu {
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go back to the list of all events\n");
         STDOUT.info("Press 4 to go back to main menu\n");
+        STDOUT.info("Press 6 to update event\n");
+        STDOUT.info("Press 7 to delete event\n");
+
 
         Scanner scanner = new Scanner(System.in);
         Integer choice = scanner.nextInt();
@@ -95,6 +108,14 @@ public class Menu {
             else if (choice == 5) {
                 favourites.deleteFromFavs(eventSent);
                 menuSingleEvent(eventSent);
+            }
+            else if(choice == 6){
+                repository.updateEventById(eventSent.getId());
+                menuSingleEvent(eventSent);
+            }
+            else if (choice == 7){
+                repository.deleteEvent(eventSent.getId());
+                menuAllEvents();
             }
         }
     }
@@ -121,5 +142,6 @@ public class Menu {
                 start();
         }
     }
+
 
 }
