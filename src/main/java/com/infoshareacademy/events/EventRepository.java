@@ -276,7 +276,11 @@ public class EventRepository implements EventRepositoryInterface {
             STDOUT.info("Event ID: " + event.getId() + "\n");
             STDOUT.info("This Event is: " + isActive + "\n");
             STDOUT.info("Description: " + event.getName() + "\n");
-            STDOUT.info("Place: " + event.getPlace().getSubname() + "\n");
+            if (event.getPlace().getSubname() != null) {
+                STDOUT.info("Place: " + event.getPlace().getSubname()+"\n");
+            } else {
+                STDOUT.info("Place: " + event.getPlace().getName()+"\n");
+            }
             STDOUT.info("Organiser: " + event.getOrganizer().getDesignation() + "\n");
             STDOUT.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
             STDOUT.info("End Date: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
@@ -289,50 +293,63 @@ public class EventRepository implements EventRepositoryInterface {
     public void showSingleEvent(Integer eventId) throws IOException {
         clearScreen();
         boolean eventFound = false;
-        String isActive;
         for (Event event : eventSet) {
             if (event.getId().equals(eventId)) {
                 eventFound = true;
-
-                    if (event.getActive().equals(0)) isActive = "inactive.";
-                    else isActive = "active.";
-                    STDOUT.info("Event ID: " + event.getId() + ". This event is " + isActive + "\n");
-                    STDOUT.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-                    STDOUT.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
-                    STDOUT.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
-                    STDOUT.info(event.trimDescription(event.getDescLong()));
-                    if (event.getPlace().getSubname() != null)
-                        STDOUT.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
-                    else
-                        STDOUT.info("\n\nPlace: " + event.getPlace().getName());
-                    STDOUT.info("\nOrganiser:" + event.getOrganizer().getDesignation());
-                    if (event.getTickets().getStartTicket() != null)
-                        STDOUT.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
-                    if (event.getTickets().getEndTicket() != null)
-                        STDOUT.info("\nGet tickets on " + event.getUrls().getTickets());
-                    STDOUT.info("\n\nEvent URL: " + event.getUrls().getWww());
-                    if (event.getAttachments().length != 0) STDOUT.info("\nAttachments: ");
-                    for (Attachment attachment1 : event.getAttachments())
-                        STDOUT.info("/n" + attachment1.getFileName());
+                singleEventData(event);
                 Menu.menuSingleEvent(event);
                 break;
             }
         }
         if (!eventFound) {
-            STDOUT.info("Event not found! Going back to list of all events in: \n");
-            Integer i = 5;
-            while (i > 0) {
-                STDOUT.info(i.toString() + "... \n");
-                try {
-                    i--;
-                    Thread.sleep(1000L);    // 1000L = 1000ms = 1 second
-                } catch (InterruptedException e) {
-                    STDOUT.info(e.getMessage());
-                    showAllEvents();
+            STDOUT.info("Event not found! Try again or press 1 to go back to main menu\n");
+            Scanner scanner = new Scanner(System.in);
+            int choice = 0;
+            try{
+                choice = scanner.nextInt();
+                if (choice != 1) {
+                    showSingleEvent(choice);
+                } else {
+                    Menu.start();
                 }
+            } catch (Exception e){
+                STDOUT.info("Please enter valid number");
             }
-            showAllEvents();
         }
+    }
+
+    public void singleEventData(Event event) {
+        String isActive;
+            if (event.getActive().equals(0)){
+                 isActive = "inactive.";
+            } else isActive = "active.";
+
+        STDOUT.info("---------------*---------------");
+        STDOUT.info("\nEvent ID: " + event.getId() + ". This event is " + isActive + "\n");
+        STDOUT.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+        STDOUT.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+        STDOUT.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
+        STDOUT.info(event.trimDescription(event.getDescLong()));
+
+            if (event.getPlace().getSubname() != null) {
+                STDOUT.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+            } else {
+                STDOUT.info("\n\nPlace: " + event.getPlace().getName());
+            }
+        STDOUT.info("\nOrganiser:" + event.getOrganizer().getDesignation());
+            if (event.getTickets().getStartTicket() != null) {
+                STDOUT.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+            }
+            if (event.getTickets().getEndTicket() != null) {
+                STDOUT.info("\nGet tickets on " + event.getUrls().getTickets());
+            }
+        STDOUT.info("\n\nEvent URL: " + event.getUrls().getWww());
+            if (event.getAttachments().length != 0) {
+                STDOUT.info("\nAttachments: ");
+                for (Attachment attachment1 : event.getAttachments())
+                    STDOUT.info("\n" + attachment1.getFileName());
+        }
+        STDOUT.info("\n---------------*---------------");
     }
 
     public String getUserQuery() {
