@@ -5,10 +5,15 @@ public class Place {
     private String subname;
     private String name;
 
+
     public Place(String id, String subname, String name) {
         this.id = id;
         this.subname = subname;
         this.name = name;
+    }
+
+    public Place() {
+
     }
 
     public String getId() {
@@ -37,9 +42,7 @@ public class Place {
 
     @Override
     public String toString() {
-        return "Place " +
-                "id : " + id  +
-                ", subname : " + subname +
+        return " subname : " + subname +
                 ", name : " + name;
     }
 }
