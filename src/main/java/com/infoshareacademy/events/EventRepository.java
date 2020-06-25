@@ -1,9 +1,13 @@
 package com.infoshareacademy.events;
 
 import com.infoshareacademy.navigation.Menu;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class EventRepository implements EventRepositoryInterface {
@@ -24,7 +28,7 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public boolean createEvent(Event event) {
-        if (!eventExist(event)){
+        if (!eventExist(event)) {
             eventSet.add(event);
             STDOUT.info("New event has been created successfully! \n" + event);
             return true;
@@ -113,7 +117,7 @@ public class EventRepository implements EventRepositoryInterface {
     @Override
     public boolean deleteEvent(Integer eventId) {
         for (Event event : eventSet) {
-            if (eventId.equals(event.getId())){
+            if (eventId.equals(event.getId())) {
                 eventSet.remove(event);
                 STDOUT.info("Event has been deleted");
                 return true;
@@ -122,6 +126,7 @@ public class EventRepository implements EventRepositoryInterface {
         STDOUT.info("\nFailed! Please try again");
         return false;
     }
+
 
     @Override
     public boolean updateEventById(Integer eventId) {
@@ -305,14 +310,14 @@ public class EventRepository implements EventRepositoryInterface {
             STDOUT.info("Event not found! Try again or press 1 to go back to main menu\n");
             Scanner scanner = new Scanner(System.in);
             int choice = 0;
-            try{
+            try {
                 choice = scanner.nextInt();
                 if (choice != 1) {
                     showSingleEvent(choice);
                 } else {
                     Menu.start();
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 STDOUT.info("Please enter valid number");
             }
         }
@@ -320,43 +325,162 @@ public class EventRepository implements EventRepositoryInterface {
 
     public void singleEventData(Event event) {
         String isActive;
-            if (event.getActive().equals(0)){
-                 isActive = "inactive.";
-            } else isActive = "active.";
+        if (event.getActive().equals(0)) {
+            isActive = "inactive.";
+        } else isActive = "active.";
 
-        STDOUT.info("---------------*---------------");
+        STDOUT.info("\n---------------*---------------");
         STDOUT.info("\nEvent ID: " + event.getId() + ". This event is " + isActive + "\n");
         STDOUT.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
         STDOUT.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
         STDOUT.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
         STDOUT.info(event.trimDescription(event.getDescLong()));
 
-            if (event.getPlace().getSubname() != null) {
-                STDOUT.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
-            } else {
-                STDOUT.info("\n\nPlace: " + event.getPlace().getName());
-            }
+        if (event.getPlace().getSubname() != null) {
+            STDOUT.info("\n\nPlace: " + event.getPlace().getName() + ", " + event.getPlace().getSubname());
+        } else {
+            STDOUT.info("\n\nPlace: " + event.getPlace().getName());
+        }
         STDOUT.info("\nOrganiser:" + event.getOrganizer().getDesignation());
-            if (event.getTickets().getStartTicket() != null) {
-                STDOUT.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
-            }
-            if (event.getTickets().getEndTicket() != null) {
-                STDOUT.info("\nGet tickets on " + event.getUrls().getTickets());
-            }
+        if (event.getTickets().getStartTicket() != null) {
+            STDOUT.info(("\n\nTickets from " + event.getTickets().getStartTicket() + " to " + event.getTickets().getEndTicket()));
+        }
+        if (event.getTickets().getEndTicket() != null) {
+            STDOUT.info("\nGet tickets on " + event.getUrls().getTickets());
+        }
         STDOUT.info("\n\nEvent URL: " + event.getUrls().getWww());
-            if (event.getAttachments().length != 0) {
-                STDOUT.info("\nAttachments: ");
-                for (Attachment attachment1 : event.getAttachments())
-                    STDOUT.info("\n" + attachment1.getFileName());
+        if (event.getAttachments().length != 0) {
+            STDOUT.info("\nAttachments: ");
+            for (Attachment attachment1 : event.getAttachments())
+                STDOUT.info("\n" + attachment1.getFileName());
         }
         STDOUT.info("\n---------------*---------------");
     }
 
+    public void showListOfEvents (List <Event> list){
+        for (Event event : list) {
+            singleEventData(event);
+        }
+    }
+
+
+    @Override
+    public List<Event> searchByString(String userInput) {
+        List<Event> list = new ArrayList<>();
+        String eventSpecification;
+        for (Event event : eventSet) {
+            eventSpecification = event.returnEventParams();
+            if (eventSpecification.toLowerCase()
+                    .contains
+                            (userInput.toLowerCase())) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Event> searchByOrganizer(String organizer) {
+        List<Event> list = new ArrayList<>();
+        for (Event event : eventSet) {
+            if (event.getOrganizer().getDesignation().toLowerCase()
+                    .contains
+                            (organizer.toLowerCase())) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Event> searchByPlace(String place) {
+        List<Event> list = new ArrayList<>();
+        for (Event event : eventSet) {
+            String nameAndSubname = event.getPlace().getName() + event.getPlace().getSubname();
+            if (nameAndSubname.toLowerCase()
+                    .contains(
+                            place.toLowerCase())) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    // 1 if active, 0 if inactive
+    public List<Event> searchActive(Integer active) {
+        List<Event> list = new ArrayList<>();
+        for (Event event : eventSet) {
+            if (event.getActive().equals(active)) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Event> searchByName(String name) {
+        List<Event> list = new ArrayList<>();
+        for (Event event : eventSet) {
+            if (event.getName().toLowerCase()
+                    .contains(
+                            name.toLowerCase())) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+    public LocalDate stringToLocalDate (String date){
+        Properties prop = Event.readPropertiesFile();
+        String[] dateArray = date.split("T");
+        LocalDate eventDate = LocalDate.parse(dateArray[0]);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(prop.getProperty("date.format"));
+        String eventDate1 = eventDate.format(dtf);
+        return LocalDate.parse(eventDate1, dtf);
+    }
+
+    // method to search for event dates
+    public List<Event> searchByExactDate(String date) {
+        LocalDate queryDate = stringToLocalDate(date);
+
+        List<Event> list = new ArrayList<>();
+        for (Event event : eventSet) {
+            LocalDate eventStart = stringToLocalDate(event.getStartDate());
+            LocalDate eventEnd = stringToLocalDate(event.getEndDate());
+            if (eventStart.isBefore(queryDate) && eventEnd.isAfter(queryDate)) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+    // method to search for event dates
+    public List<Event> searchByMonth (String date) {
+        LocalDate queryDate = stringToLocalDate(date);
+        int queryMonth = queryDate.getMonth().getValue();
+        List<Event> list = new ArrayList<>();
+        for (Event event : eventSet) {
+            LocalDate eventStart = stringToLocalDate(event.getStartDate());
+            LocalDate eventEnd = stringToLocalDate(event.getEndDate());
+            int startMonth = eventStart.getMonth().getValue();
+            int endMonth = eventEnd.getMonth().getValue();
+            if (startMonth < queryMonth
+                    &&
+                    endMonth >= queryMonth) {
+                list.add(event);
+            }
+        }
+        return list;
+    }
+
+
+    // method to get random String from user for random user's query (at least 3 characters)
     public String getUserQuery() {
         Scanner scanner = new Scanner(System.in);
         String userInput;
         while (true) {
-            STDOUT.info("\nPlease provide at least 3 characters in your query:\n");
+            STDOUT.info(" Please provide at least 3 characters in your query:\n");
             userInput = scanner.nextLine();
             if (userInput.length() >= 3) {
                 return userInput;
@@ -366,31 +490,43 @@ public class EventRepository implements EventRepositoryInterface {
         }
     }
 
-    @Override
-    public List<Event> searchByString(String userInput) {
-        List<Event> eventList = new ArrayList<>();
-        String eventSpecification;
-        for (Event event : eventSet) {
-            eventSpecification = event.returnEventParams();
-            if (eventSpecification.toLowerCase()
-                    .contains
-                            (userInput.toLowerCase())) {
-                eventList.add(event);
+
+    public String getInputForName() {
+        STDOUT.info("\nProvide name of the event you search for.");
+        return getUserQuery();
+    }
+
+    public String getInputForPlace() {
+        STDOUT.info("\nProvide name of the place to search for events happening there.");
+        return getUserQuery();
+    }
+
+    public Integer getInputForActive() {
+        Scanner scanner = new Scanner(System.in);
+        Integer userInput;
+        while (true) {
+            STDOUT.info("\nSelect 1 if you want to search for active events, select 0 for inactive events.\n\n");
+           STDOUT.info("Please insert your choice: ");
+            userInput = scanner.nextInt();
+            if (userInput.equals(1) || userInput.equals(0)) {
+                return userInput;
+            } else {
+                STDOUT.info("\nIncorrect value provided.");
             }
         }
-        return eventList;
     }
 
-    @Override
-    public List<Event> searchByInteger(Integer name) {
-        return null;
+    public String getInputForOrganizer() {
+        STDOUT.info("\nProvide name of organizer to see all events hosted by them: \n");
+        String userInput = getUserQuery();
+        return userInput;
     }
 
-    @Override
-    public List<Event> filterEvents() {
-        return null;
+    public String getRandomInput() {
+        STDOUT.info("\nProvide your random query.");
+        String userInput = getUserQuery();
+        return userInput;
     }
-
 
     public Set<Event> getEventSet() {
         return eventSet;
