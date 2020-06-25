@@ -9,11 +9,15 @@ public class EventURL {
         this.tickets = tickets;
     }
 
+    public EventURL() {
+
+    }
+
     @Override
     public String toString() {
         return "EventURL " +
-                "www = " + www +
-                ", tickets = " + tickets;
+                "www = " + www ;
+
     }
 
     public String getWww() {
