@@ -1,5 +1,6 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.events.EventRepository;
 import com.infoshareacademy.navigation.Menu;
 import java.io.IOException;
 

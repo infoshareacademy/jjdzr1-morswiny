@@ -35,16 +35,20 @@ public interface EventRepositoryInterface {
     //wyszukiwanie String
     List<Event> searchByString(String name);
 
-    //wyszukiwanie int
-    List<Event> searchByInteger(Integer name);
 
     //wyszukiwanie po dacie
 
     //wyszukiwanie po organizatorze
+    List <Event> searchByOrganizer (String organizer);
 
+    //wyszukiwanie po miejscu
+    List<Event> searchByPlace (String place);
+
+    //wyszukiwanie aktywnych/nieaktywnych eventow
+    List<Event> searchActive (Integer active);
 
     //filtrowanie eventow po nazwie == sortowanie
-    List<Event> filterEvents();
+    List<Event> searchByName(String name);
 
 
 
