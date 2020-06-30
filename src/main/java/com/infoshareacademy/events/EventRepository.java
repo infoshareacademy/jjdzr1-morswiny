@@ -2,6 +2,7 @@ package com.infoshareacademy.events;
 
 import com.infoshareacademy.navigation.Menu;
 
+import jdk.nashorn.internal.runtime.ECMAException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -99,9 +100,24 @@ public class EventRepository implements EventRepositoryInterface {
         if (scanner.hasNextLine()){
             try {
                 String attach = scanner.nextLine();
-                Attachment[] attachment = event.getAttachments();
+                Attachment[] attachment = new Attachment[1];
                 attachment[0].setFileName(attach);
                 event.setAttachments(attachment);
+            } catch (NullPointerException e) {
+            }
+            STDOUT.info("Enter description\n");
+        }
+        if (scanner.hasNextLine()) {
+            String desc = scanner.nextLine();
+            event.setDescLong(desc);
+            STDOUT.info("Enter ticket type\n");
+        }
+        if (scanner.hasNextLine()){
+            try {
+                String ticketType = scanner.nextLine();
+                Ticket ticket = new Ticket();
+                ticket.setType(ticketType);
+                event.setTickets(ticket);
             } catch (NullPointerException e) {
             }
             STDOUT.info("Enter 1 if event is active, 0 if inactive\n");
@@ -331,8 +347,12 @@ public class EventRepository implements EventRepositoryInterface {
 
         STDOUT.info("\n---------------*---------------");
         STDOUT.info("\nEvent ID: " + event.getId() + ". This event is " + isActive + "\n");
-        STDOUT.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
-        STDOUT.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+        try {
+            STDOUT.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+            STDOUT.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");
+        } catch (Exception e){
+            STDOUT.info("Incorrect date format \n\n");
+        }
         STDOUT.info(event.getName() + " @ " + event.getPlace().getName() + "\n");
         STDOUT.info(event.trimDescription(event.getDescLong()));
 
@@ -349,12 +369,15 @@ public class EventRepository implements EventRepositoryInterface {
             STDOUT.info("\nGet tickets on " + event.getUrls().getTickets());
         }
         STDOUT.info("\n\nEvent URL: " + event.getUrls().getWww());
+        try {
         if (event.getAttachments().length != 0) {
-            STDOUT.info("\nAttachments: ");
-            for (Attachment attachment1 : event.getAttachments())
-                STDOUT.info("\n" + attachment1.getFileName());
-        }
+                STDOUT.info("\nAttachments: ");
+                for (Attachment attachment1 : event.getAttachments())
+                    STDOUT.info("\n" + attachment1.getFileName());
+            }
         STDOUT.info("\n---------------*---------------");
+        }catch (NullPointerException e){
+        }
     }
 
     public void showListOfEvents (List <Event> list){
