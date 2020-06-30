@@ -11,6 +11,10 @@ public class Ticket {
         this.endTicket = endTicket;
     }
 
+    public Ticket() {
+
+    }
+
     @Override
     public String toString() {
         return "Ticket " +
