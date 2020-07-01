@@ -7,6 +7,9 @@ public class Attachment {
         this.fileName = fileName;
     }
 
+    public Attachment() {
+    }
+
     @Override
     public String toString() {
         return "Attachment " +

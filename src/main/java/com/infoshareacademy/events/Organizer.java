@@ -9,11 +9,13 @@ public class Organizer {
         this.designation = designation;
     }
 
+    public Organizer() {
+
+    }
+
     @Override
     public String toString() {
-        return "Organizer " +
-                "id = " + id +
-                ", designation = " + designation ;
+        return "designation : " + designation ;
     }
 
     public String getId() {

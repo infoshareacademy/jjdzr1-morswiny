@@ -23,6 +23,9 @@ public class Event {
     private Integer  active;
     private Ticket tickets;
 
+    public Event(){
+    }
+
     private static final Logger logger = LoggerFactory.getLogger("CONSOLE_OUT");
 
     @Override
@@ -56,15 +59,13 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", place=" + place +
-                ", endDate='" + endDate + '\'' +
-                ", name='" + name + '\'' +
+                ", endDate=" + endDate  +
+                ", name=" + name  +
                 ", urls=" + urls +
-                ", attachments=" + Arrays.toString(attachments) +
-                ", categoryId='" + categoryId + '\'' +
-                ", startDate='" + startDate + '\'' +
+                ", categoryId=" + categoryId  +
+                ", startDate=" + startDate  +
                 ", organizer=" + organizer +
                 ", active=" + active +
-                ", tickets=" + tickets +
                 '}';
     }
 

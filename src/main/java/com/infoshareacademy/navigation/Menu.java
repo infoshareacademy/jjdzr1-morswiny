@@ -35,7 +35,8 @@ public class Menu {
         STDOUT.info("Press 1 to view all events\n");
         STDOUT.info("Press 2 to view favourites\n");
         STDOUT.info("Press 3 to search for events\n");
-        STDOUT.info("Press 4 to exit\n\n");
+        STDOUT.info("Press 4 to create new event\n");
+        STDOUT.info("Press 5 to exit\n\n");
         STDOUT.info("Please insert your choice:  ");
 
 
@@ -49,6 +50,13 @@ public class Menu {
             Menu menu = new Menu();
             menuSearchEvents(repository);
         } else if (choice == 4) {
+            try {
+                repository.createEvent(getRepository().putEventData());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Menu.menuAllEvents();
+        }else if (choice == 5) {
             System.exit(0);
         } else {
             start();
@@ -93,6 +101,8 @@ public class Menu {
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go back to the list of all events\n");
         STDOUT.info("Press 4 to go back to main menu\n\n");
+        STDOUT.info("Press 6 to update event\n");
+        STDOUT.info("Press 7 to delete event\n");
         STDOUT.info("Please insert your choice:  ");
 
 
@@ -112,7 +122,16 @@ public class Menu {
             else if (choice == 5) {
                 favourites.deleteFromFavs(eventSent);
                 menuSingleEvent(eventSent);
-            } else {
+            }
+            else if(choice == 6){
+                repository.updateEventById(eventSent.getId());
+                menuSingleEvent(eventSent);
+            }
+            else if (choice == 7){
+                repository.deleteEvent(eventSent.getId());
+                menuAllEvents();
+            }
+            else {
                 STDOUT.info("Please enter valid number: ");
                 choice = scanner.nextInt();
             }
