@@ -185,6 +185,7 @@ public class Menu {
                 programStart();
                 break;
         }
+        programStart();
     }
 
     public Integer getUserInput() {
