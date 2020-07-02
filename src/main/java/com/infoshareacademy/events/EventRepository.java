@@ -151,33 +151,27 @@ public class EventRepository implements EventRepositoryInterface {
                 STDOUT.info("Please enter new name. To go next hit Enter ");
                 Scanner scanName = new Scanner(System.in);
                 String name = scanName.nextLine();
-                if (!name.equals("")) {
+                if (!name.isEmpty()) {
                     event.setName(name);
-                } else {
-                    event.getName();
                 }
                 STDOUT.info("Please enter new place name. To go next hit Enter ");
                 Scanner scanPlace = new Scanner(System.in);
                 String placeName = scanPlace.nextLine();
-                if (!placeName.equals("")) {
+                if (!placeName.isEmpty()) {
                     Place place = event.getPlace();
                     place.setName(placeName);
-                } else {
-                    event.getPlace().getName();
                 }
                 STDOUT.info("Please enter new  place subname. To go next hit Enter ");
                 Scanner scanSubname = new Scanner(System.in);
                 String subname = scanSubname.nextLine();
-                if (!subname.equals("")) {
+                if (!subname.isEmpty()) {
                     Place place = event.getPlace();
                     place.setSubname(subname);
-                } else {
-                    event.getPlace().getSubname();
                 }
                 STDOUT.info("Please enter new start date. To go next hit Enter ");
                 Scanner scanStartDate = new Scanner(System.in);
                 String startDate = scanStartDate.nextLine();
-                if (!startDate.equals("")) {
+                if (!startDate.isEmpty()) {
                     event.setStartDate(startDate);
                 } else {
                     event.dateTimeFormatter(event.getStartDate());
@@ -185,7 +179,7 @@ public class EventRepository implements EventRepositoryInterface {
                 STDOUT.info("Please enter new end date. To go next hit Enter ");
                 Scanner scanEndDate = new Scanner(System.in);
                 String endDate = scanEndDate.nextLine();
-                if (!endDate.equals("")) {
+                if (!endDate.isEmpty()) {
                     event.setEndDate(endDate);
                 } else {
                     event.dateTimeFormatter(event.getEndDate());
@@ -193,37 +187,29 @@ public class EventRepository implements EventRepositoryInterface {
                 STDOUT.info("Please enter new organizer designation. To go next hit Enter ");
                 Scanner scanOrganizer = new Scanner(System.in);
                 String organizer = scanOrganizer.nextLine();
-                if (!organizer.equals("")) {
+                if (!organizer.isEmpty()) {
                     Organizer org = event.getOrganizer();
                     org.setDesignation(organizer);
-                } else {
-                    event.getOrganizer().getDesignation();
                 }
                 STDOUT.info("Please enter new event URL. To go next hit Enter ");
                 Scanner scanUrlWww = new Scanner(System.in);
                 String urlW = scanUrlWww.nextLine();
-                if (!urlW.equals("")) {
+                if (!urlW.isEmpty()) {
                     EventURL eventURL = event.getUrls();
                     eventURL.setWww(urlW);
-                } else {
-                    event.getUrls().getWww();
                 }
                 STDOUT.info("Please enter new event URL for tickets. To go next hit Enter ");
                 Scanner scanUrlTicket = new Scanner(System.in);
                 String urlT = scanUrlTicket.nextLine();
-                if (!urlT.equals("")) {
+                if (!urlT.isEmpty()) {
                     EventURL eventURL = event.getUrls();
                     eventURL.setTickets(urlT);
-                } else {
-                    event.getUrls().getTickets();
                 }
                 STDOUT.info("Please enter new category ID. To go next hit Enter ");
                 Scanner scanCat = new Scanner(System.in);
                 String cat = scanCat.nextLine();
-                if (!cat.equals("")) {
+                if (!cat.isEmpty()) {
                     event.setCategoryId(cat);
-                } else {
-                    event.getCategoryId();
                 }
                 STDOUT.info("Please enter 'yes' if event is active. To go next hit Enter ");
                 Scanner scanActive = new Scanner(System.in);
@@ -236,43 +222,34 @@ public class EventRepository implements EventRepositoryInterface {
                 STDOUT.info("Please enter new ticket type. To go next hit Enter ");
                 Scanner scanTicketType = new Scanner(System.in);
                 String ticketType = scanCat.nextLine();
-                if (!ticketType.equals("")) {
+                if (!ticketType.isEmpty()) {
                     Ticket ticket = event.getTickets();
                     ticket.setType(ticketType);
-                } else {
-                    event.getTickets().getType();
                 }
                 STDOUT.info("Please enter new start ticket. To go next hit Enter ");
                 Scanner scanStartT = new Scanner(System.in);
                 String startTicket = scanCat.nextLine();
-                if (!startTicket.equals("")) {
+                if (!startTicket.isEmpty()) {
                     Ticket ticket = event.getTickets();
                     ticket.setStartTicket(startTicket);
-                } else {
-                    event.getTickets().getStartTicket();
                 }
                 STDOUT.info("Please enter new end ticket. To go next hit Enter ");
                 Scanner scanEndT = new Scanner(System.in);
                 String endTicket = scanCat.nextLine();
-                if (!endTicket.equals("")) {
+                if (!endTicket.isEmpty()) {
                     Ticket ticket = event.getTickets();
                     ticket.setEndTicket(endTicket);
-                } else {
-                    event.getTickets().getEndTicket();
                 }
                 STDOUT.info("Please enter new attachment. To go next hit Enter ");
                 Scanner scanAttachment = new Scanner(System.in);
                 String attach = scanAttachment.nextLine();
-                if (!attach.equals("")) {
+                if (!attach.isEmpty()) {
                     for (Attachment attachment : event.getAttachments()) {
                         attachment.setFileName(attach);
                     }
-                } else {
-                    for (Attachment attachment : event.getAttachments()) {
-                        attachment.getFileName();
-                    }
                 }
                 STDOUT.info("Event has been updated \n" + event.toString());
+                return true;
             }
 
         }
