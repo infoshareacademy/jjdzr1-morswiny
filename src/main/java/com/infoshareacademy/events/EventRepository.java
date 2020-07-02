@@ -173,16 +173,12 @@ public class EventRepository implements EventRepositoryInterface {
                 String startDate = scanStartDate.nextLine();
                 if (!startDate.isEmpty()) {
                     event.setStartDate(startDate);
-                } else {
-                    event.dateTimeFormatter(event.getStartDate());
                 }
                 STDOUT.info("Please enter new end date. To go next hit Enter ");
                 Scanner scanEndDate = new Scanner(System.in);
                 String endDate = scanEndDate.nextLine();
                 if (!endDate.isEmpty()) {
                     event.setEndDate(endDate);
-                } else {
-                    event.dateTimeFormatter(event.getEndDate());
                 }
                 STDOUT.info("Please enter new organizer designation. To go next hit Enter ");
                 Scanner scanOrganizer = new Scanner(System.in);

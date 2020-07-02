@@ -100,7 +100,7 @@ public class Menu {
             STDOUT.info("\n\n*This event is on your favourites list.* \nPress 5 to remove it from your favourites\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go back to the list of all events\n");
-        STDOUT.info("Press 4 to go back to main menu\n\n");
+        STDOUT.info("Press 4 to go back to main menu\n");
         STDOUT.info("Press 6 to update event\n");
         STDOUT.info("Press 7 to delete event\n");
         STDOUT.info("Please insert your choice:  ");
