@@ -209,10 +209,10 @@ public class Menu {
                 break;
             case 7:
                 EventRepository.clearScreen();
-                programStart();
+                start();
                 break;
         }
-        programStart();
+        start();
     }
 
     public static Integer getUserInput() {
