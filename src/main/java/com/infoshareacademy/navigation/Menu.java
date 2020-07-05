@@ -175,8 +175,8 @@ public class Menu {
         STDOUT.info("\nPress 4 if you want to search events by event status whether it is active or not.");
         STDOUT.info("\nPress 5 if you want to search events by any event characteristic.\n");
         STDOUT.info("\nPress 7 if you want to go back to menu.\n\n");
-        Menu menu = new Menu();
-        Integer userInput = menu.getUserInput();
+
+        Integer userInput = getUserInput();
 
         switch (userInput) {
             case 1:
@@ -207,7 +207,7 @@ public class Menu {
         programStart();
     }
 
-    public Integer getUserInput() {
+    public static Integer getUserInput() {
 
         Set<Integer> legitimateValues = new HashSet<>();
         legitimateValues.add(1);
