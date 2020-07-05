@@ -2,7 +2,6 @@ package com.infoshareacademy.events;
 
 import com.infoshareacademy.navigation.Menu;
 
-import jdk.nashorn.internal.runtime.ECMAException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -259,7 +258,6 @@ public class EventRepository implements EventRepositoryInterface {
 
     @Override
     public void showAllEvents() throws IOException {
-        clearScreen();
         String isActive;
         for (Event event : eventSet) {
             if (event.getActive().equals(1)) {
@@ -313,6 +311,7 @@ public class EventRepository implements EventRepositoryInterface {
     }
 
     public void singleEventData(Event event) {
+        clearScreen();
         String isActive;
         if (event.getActive().equals(0)) {
             isActive = "inactive.";
