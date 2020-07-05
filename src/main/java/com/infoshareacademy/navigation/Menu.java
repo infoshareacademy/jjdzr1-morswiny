@@ -65,7 +65,6 @@ public class Menu {
 
     public static void menuAllEvents() throws IOException {
 
-        EventRepository eventRepository = new EventRepository();
         STDOUT.info("\nPress 1 to go to detailed information for selected event\n");
         STDOUT.info("Press 2 to go back to main menu\n");
         STDOUT.info("Press 3 to search for events\n\n");
