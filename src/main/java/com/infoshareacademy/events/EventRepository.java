@@ -318,7 +318,8 @@ public class EventRepository implements EventRepositoryInterface {
         } else isActive = "active.";
 
         STDOUT.info("\n---------------*---------------");
-        STDOUT.info("\nEvent ID: " + event.getId() + ". This event is " + isActive + "\n");
+        STDOUT.info("\nEvent ID: " + event.getId() + ".\n");
+        STDOUT.info("This event is "+isActive+"\n");
         try {
             STDOUT.info("Start: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
             STDOUT.info("End: " + event.dateTimeFormatter(event.getEndDate()) + "\n\n");

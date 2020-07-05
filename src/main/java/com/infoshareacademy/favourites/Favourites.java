@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Favourites {
 
-    private static final Logger logger = LoggerFactory.getLogger("CONSOLE_OUT");
+    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
     private static final List<Event> favList = new ArrayList<>();
 
     public static List<Event> getFavourites() {
@@ -22,9 +22,9 @@ public class Favourites {
     public void deleteFromFavs(Event eventToDelete) {
         if(favList.contains(eventToDelete)){
             favList.remove(eventToDelete);
-            logger.info("Event deleted!\n");
+            STDOUT.info("Event deleted!\n");
         } else {
-            logger.info("This event was not on the list!\n");
+            STDOUT.info("This event was not on the list!\n");
         }
     }
 
@@ -32,19 +32,20 @@ public class Favourites {
         if (!favList.isEmpty()) {
             int i = 1;
             for (Event event : favList) {
-                logger.info("------------" +    i   + "------------\n");
-                logger.info("Event ID: " + event.getId() + "\n");
-                logger.info(event.getName());
-                logger.info(" @ " + event.getPlace().getName());
-                logger.info("\nOrganiser: " + event.getOrganizer().getDesignation() + "\n");
-                logger.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
+                STDOUT.info("------------" +    i   + "------------\n");
+                STDOUT.info("Event ID: " + event.getId() + "\n");
+                STDOUT.info(event.getName());
+                STDOUT.info(" @ " + event.getPlace().getName());
+                STDOUT.info("\nOrganiser: " + event.getOrganizer().getDesignation() + "\n");
+                STDOUT.info("Start Date: " + event.dateTimeFormatter(event.getStartDate()) + "\n");
                 i += 1;
             }
-            logger.info("-------------------------");
+            STDOUT.info("-------------------------");
         } else {
-            logger.info("\nThe list is empty!\n");
-            logger.info("Press 1 to go to main menu\n");
-            logger.info("Press 2 to see all events\n");
+
+            STDOUT.info("\nThe list is empty!\n");
+            STDOUT.info("Press 1 to go to main menu\n");
+            STDOUT.info("Press 2 to see all events\n");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             if (choice == 1)
@@ -52,18 +53,18 @@ public class Favourites {
             else if (choice == 2)
                 Menu.getRepository().showAllEvents();
             else {
-                logger.info("\nYou entered wrong number. Going back to menu");
+                STDOUT.info("\nYou entered wrong number. Going back to menu");
                 Menu.start();
             }
         }
         if (!favList.isEmpty()) {
-                logger.info("\nPress 1 to see details about favourite event\n");
-                logger.info("Press 2 to go back to main menu\n");
+                STDOUT.info("\nPress 1 to see details about favourite event\n");
+                STDOUT.info("Press 2 to go back to main menu\n");
                 Scanner scanner = new Scanner(System.in);
                 int choice = scanner.nextInt();
                 while (true) {
                     if (choice == 1) {
-                        logger.info("Please input ID of event you want to show\n");
+                        STDOUT.info("Please input ID of event you want to show\n");
                         Integer inputId = scanner.nextInt();
                         boolean eventFound = false;
                         for (Event favEvent : favList){
@@ -74,13 +75,13 @@ public class Favourites {
                             }
                         }
                         if (!eventFound) {
-                            logger.info("Event not found!");
+                            STDOUT.info("Event not found!");
                             showFavs();
                         }
                     } else if (choice == 2) {
                         Menu.start();
                     } else {
-                        logger.info("Please enter valid number: ");
+                        STDOUT.info("Please enter valid number: ");
                         choice = scanner.nextInt();
                     }
                 }
@@ -90,9 +91,9 @@ public class Favourites {
     public void addToFavs(Event eventToAdd) {
         if(!favList.contains(eventToAdd)){
            favList.add(eventToAdd);
-            logger.info("Event added!\n");
+            STDOUT.info("Event added!\n");
         } else {
-            logger.info("This event is already on the list!\n");
+            STDOUT.info("This event is already on the list!\n");
         }
     }
 }

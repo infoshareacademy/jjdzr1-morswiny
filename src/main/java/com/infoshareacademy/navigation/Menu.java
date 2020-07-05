@@ -32,7 +32,7 @@ public class Menu {
 
         EventRepository.clearScreen();
         STDOUT.info("Welcome to our programme!\n\n");
-        STDOUT.info("You are currently in the Home Page.\n");
+        STDOUT.info("Navigation: You are currently in the Home Page.\n");
         STDOUT.info("Below you will find a list of available options to choose from.\n\n");
         STDOUT.info("Press 1 to view all events\n");
         STDOUT.info("Press 2 to view favourites\n");
@@ -67,9 +67,9 @@ public class Menu {
 
     public static void menuAllEvents() throws IOException {
 
-        STDOUT.info("You are currently in the All Events Page\n");
+        STDOUT.info("Navigation: You are currently in the All Events Page\n");
         STDOUT.info("Below you will find a list of available options to choose from.\n\n");
-        STDOUT.info("\nPress 1 to go to detailed information for selected event\n");
+        STDOUT.info("Press 1 to go to detailed information for selected event\n");
         STDOUT.info("Press 2 to go back to main menu\n");
         STDOUT.info("Press 3 to search for events\n\n");
         STDOUT.info("Please insert your choice:  ");
@@ -97,8 +97,8 @@ public class Menu {
     }
 
     public static void menuSingleEvent(Event eventSent) throws IOException {
-        STDOUT.info("You are currently in the Single Event Page\n");
-        STDOUT.info("Below you will find a list of available options to choose from.\n\n");
+        STDOUT.info("\n\nNavigation: You are currently in the Single Event Page\n");
+        STDOUT.info("Below you will find a list of available options to choose from.");
         if (!Favourites.getFavourites().contains(eventSent))
             STDOUT.info("\n\n*This event is not on your favourites list* \nPress 1 to add this event to FAVOURITES\n");
         if (Favourites.getFavourites().contains(eventSent))
@@ -107,7 +107,7 @@ public class Menu {
         STDOUT.info("Press 3 to go back to the list of all events\n");
         STDOUT.info("Press 4 to go back to main menu\n");
         STDOUT.info("Press 6 to update event\n");
-        STDOUT.info("Press 7 to delete event\n");
+        STDOUT.info("Press 7 to delete event\n\n");
         STDOUT.info("Please insert your choice:  ");
 
 
@@ -144,9 +144,9 @@ public class Menu {
     }
 
     public static void menuSingleFav(Event eventSent) throws IOException {
-        STDOUT.info("You are currently in the Single Favourite Event Page\n");
-        STDOUT.info("Below you will find a list of available options to choose from.");
-        STDOUT.info("\n\nPress 1 to remove this event from Favourites\n");
+        STDOUT.info("Navigation: You are currently in the Single Favourite Event Page\n");
+        STDOUT.info("Below you will find a list of available options to choose from.\n\n");
+        STDOUT.info("Press 1 to remove this event from Favourites\n");
         STDOUT.info("Press 2 to reserve tickets for this event\n");
         STDOUT.info("Press 3 to go to the list of favourite events\n");
         STDOUT.info("Press 4 to go back to main menu\n\n");
@@ -175,7 +175,7 @@ public class Menu {
     }
 
     public static void menuSearchEvents(EventRepository eventRepo) throws IOException {
-        STDOUT.info("You are currently in the Search Event Page\n");
+        STDOUT.info("\nYou are currently in the Search Event Page\n");
         STDOUT.info("Below you will find a list of available options to choose from.\n\n");
         STDOUT.info("\nPress 1 if you want to search events by event name.");
         STDOUT.info("\nPress 2 if you want to search events by event organizer.");
