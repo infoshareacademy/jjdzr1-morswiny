@@ -29,6 +29,8 @@ public class Favourites {
     }
 
     public void showFavs() throws IOException {
+        STDOUT.info("\nNavigation: You are currently in the Favourite Events Page.\n");
+        STDOUT.info("Below you will find a list of available options to choose from.\n");
         if (!favList.isEmpty()) {
             int i = 1;
             for (Event event : favList) {
